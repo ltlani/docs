@@ -9,10 +9,10 @@ description: "Use API keys to talk to characters outside Discord."
 
 ## How the API works (short answer)
 
-1. Create an API key in Dashboard -> Settings -> Security -> API Keys.
+1. Create an API key in Dashboard -> Settings -> Security -> API Keys (Pro and Ultra plans).
 2. Call `POST /v1/response` with `character` + `messages`.
 3. Save the returned `session_id` and reuse it for follow-up requests.
-4. Use `stream: true` for SSE streaming on Plus/Pro/Ultra plans.
+4. Use `stream: true` for SSE streaming on Ultra plans.
 5. Use `POST /v1/image` when you need image generation.
 
 Minimal text request:
@@ -33,7 +33,9 @@ Minimal text request:
 - Image endpoint: `POST /v1/image`
 - Auth: `Authorization: Bearer vka_...` or `x-api-key: vka_...`
 - Session memory: reuse `session_id` on later calls to continue context
-- Streaming: `stream: true` on `/v1/response` (Plus/Pro/Ultra)
+- API access: Pro and Ultra plans
+- Streaming: `stream: true` on `/v1/response` (Ultra)
+- Image generation allowance: Free `20/mo`, Plus `50/mo`, Pro `100/mo`, Ultra unlimited
 - Message count limit: up to `60` items in `messages`
 - Message size limits: each message text up to `4000` chars, total up to `20000` chars
 - Session ID format: optional, max `128` chars, allowed chars `A-Z a-z 0-9 : _ -`
@@ -58,7 +60,7 @@ Minimal text request:
 
 <Steps>
   <Step title="Create an API key">
-    Go to Verba <strong>Settings -&gt; Security -&gt; API Keys</strong> and create a key.
+    Go to Verba <strong>Settings -&gt; Security -&gt; API Keys</strong> and create a key. API keys are available on Pro and Ultra plans.
   </Step>
   <Step title="Pick a character">
     Use your character vanity slug or vanity URL (for example `mycharacter_abc` or `https://verba.ink/v/mycharacter_abc`).
@@ -107,7 +109,7 @@ Text completion endpoint. You can optionally attach image URLs for vision-enable
 </Note>
 
 <Note>
-  Streaming on `/v1/response` is available for Plus, Pro, and Ultra plans.
+  Streaming on `/v1/response` is available on Ultra plans.
 </Note>
 
 Required:
@@ -479,7 +481,7 @@ With `stream: true`, `/v1/response` returns `text/event-stream` and emits `data:
 - If `debug.tools=true` and tools run, extra events use `object: "chat.completion.tool_trace"`.
 - The final event is `data: [DONE]`.
 - You should concatenate `choices[0].delta.content` chunks to build the assistant message.
-- Free plans return `403 stream_plan_upgrade_required` when `stream: true` is used.
+- Free, Plus, and Pro plans return `403 stream_plan_upgrade_required` when `stream: true` is used.
 
 Example chunk:
 
@@ -689,6 +691,10 @@ Streaming with tools works the same way: the API executes tool calls server-side
 
 Generates one image URL.
 
+<Note>
+  Image generation is limited monthly by the character owner's plan: Free `20`, Plus `50`, Pro `100`, and Ultra unlimited.
+</Note>
+
 Required:
 
 - `character` string (vanity URL or vanity slug)
@@ -806,7 +812,7 @@ Invoke-RestMethod `
 
 ## Access, billing, and limits
 
-- API access is available to all users.
+- API access is available on Pro and Ultra plans.
 - Verb privacy still applies:
   - Private characters: owner only
   - Public characters: any API caller
@@ -847,8 +853,10 @@ Common error cases:
 
 - `401 invalid_api_key` for missing/invalid/revoked API key
 - `403 verb_access_denied` for private character access by non-owner
-- `403 stream_plan_upgrade_required` when free plans request `stream: true`
+- `403 api_plan_upgrade_required` when the API key owner is not on Pro or Ultra
+- `403 stream_plan_upgrade_required` when a non-Ultra plan requests `stream: true`
 - `403 insufficient_credits` when the character owner has no credits for the selected model
+- `403 image_limit_reached` when the character owner has reached their monthly image generation allowance
 - `400 invalid_message_role` when `system` role is provided in `messages`
 - `400 invalid_stream` when `stream` is not a boolean
 - `400 invalid_tools` for malformed tool schema/config

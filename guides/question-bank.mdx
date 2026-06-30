@@ -13,7 +13,7 @@ answers.
 
 ## Quick high-signal answers
 
-- API flow: create API key -> call `POST /v1/response` -> reuse returned `session_id` for follow-ups.
+- API flow: create a Pro or Ultra API key -> call `POST /v1/response` -> reuse returned `session_id` for follow-ups.
 - System instructions: set in Dashboard -> Bot -> AI Engine -> Behavior (`systemInstructions`, max `8000` chars).
 - `/v1/response` auth: `Authorization: Bearer vka_...` or `x-api-key: vka_...`.
 - Session memory: reuse `session_id` for follow-up calls.
@@ -24,7 +24,7 @@ answers.
 
 <AccordionGroup>
   <Accordion title="How does the API work?">
-    Create an API key, call `POST /v1/response` with `character` + `messages`, then reuse the returned `session_id` to keep conversation memory. Use `stream: true` for SSE on Plus/Pro/Ultra.
+    Create a Pro or Ultra API key, call `POST /v1/response` with `character` + `messages`, then reuse the returned `session_id` to keep conversation memory. Use `stream: true` for SSE on Ultra.
   </Accordion>
   <Accordion title="How do I authenticate requests to api.verba.ink?">
     Send `Authorization: Bearer vka_...` or `x-api-key: vka_...`.
@@ -42,10 +42,10 @@ answers.
     A vanity slug/path/URL (for example `/v/my_slug`).
   </Accordion>
   <Accordion title="Does API support streaming?">
-    Yes, `/v1/response` supports SSE when `stream: true`.
+    Yes, `/v1/response` supports SSE when `stream: true` on Ultra.
   </Accordion>
   <Accordion title="Why does streaming return forbidden?">
-    Streaming is plan-gated; free tier requests can return upgrade-required errors.
+    Streaming is Ultra-only; Free, Plus, and Pro requests return upgrade-required errors.
   </Accordion>
   <Accordion title="Does API keep session memory?">
     Yes, reuse `session_id` to continue context.
@@ -83,7 +83,7 @@ answers.
     Free: `50` context, `4096` max tokens. Plus: `75`, `8192`. Pro: `100`, `16384`. Ultra: `150`, `32768`.
   </Accordion>
   <Accordion title="Which plans support streaming on /v1/response?">
-    Plus, Pro, and Ultra support `stream: true`. Free does not.
+    Ultra supports `stream: true`. Free, Plus, and Pro do not.
   </Accordion>
   <Accordion title="How many verbs can I create per plan?">
     Free `5`, Plus `10`, Pro `20`, Ultra `40`.

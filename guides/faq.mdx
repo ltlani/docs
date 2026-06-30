@@ -20,10 +20,10 @@ description: "High-frequency questions across API, Discord, memory, billing, and
     Credits cover model inference and processing. Longer context and larger outputs consume more.
   </Accordion>
   <Accordion title="Can I use Verba outside Discord?">
-    Yes. Use the public API at `api.verba.ink` with your API key.
+    Yes on Pro and Ultra plans. Use the public API at `api.verba.ink` with your API key.
   </Accordion>
   <Accordion title="Do I need a paid plan to use the API?">
-    API access is available on all plans. Limits and model availability vary by tier.
+    Yes. Public API access is available on Pro and Ultra plans.
   </Accordion>
 </AccordionGroup>
 
@@ -91,7 +91,7 @@ description: "High-frequency questions across API, Discord, memory, billing, and
     Reuse `session_id` to preserve context for the same caller + character.
   </Accordion>
   <Accordion title="Can I stream responses?">
-    Yes with `stream: true` on `/v1/response` (tier restrictions apply).
+    Yes with `stream: true` on `/v1/response` if the API key owner is on Ultra.
   </Accordion>
   <Accordion title="Can I pass system messages directly in /v1/response?">
     No. Character system/personality is applied automatically.
@@ -108,7 +108,7 @@ description: "High-frequency questions across API, Discord, memory, billing, and
 
 <AccordionGroup>
   <Accordion title="Which plans support streaming on /v1/response?">
-    Streaming is available on Plus, Pro, and Ultra. Free plan streaming requests are rejected.
+    Streaming is available on Ultra. Free, Plus, and Pro streaming requests are rejected.
   </Accordion>
   <Accordion title="How many verbs can I create per plan?">
     Free: 5, Plus: 10, Pro: 20, Ultra: 40.

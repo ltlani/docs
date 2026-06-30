@@ -5,13 +5,14 @@ description: "Complete plan matrix for premium features, usage limits, and API b
 
 ## Premium quick answers
 
-- API access is available on all plans (`/v1/response`, `/v1/image`).
+- API access is available on Pro and Ultra plans (`/v1/response`, `/v1/image`).
 - Full matrix (`verbs/msg-min/context/max-tokens`): Free `5/20/50/4096`, Plus `10/40/75/8192`, Pro `20/100/100/16384`, Ultra `40/unlimited/150/32768`.
 - Free: `5` verbs, `20` msg/min, `50` context, `4096` max tokens.
 - Plus: `10` verbs, `40` msg/min, `75` context, `8192` max tokens.
 - Pro: `20` verbs, `100` msg/min, `100` context, `16384` max tokens.
 - Ultra: `40` verbs, unlimited msg/min, `150` context, `32768` max tokens.
-- Streaming (`stream: true`) is available on Plus/Pro/Ultra.
+- Streaming (`stream: true`) is available on Ultra.
+- Image generation monthly allowance: Free `20`, Plus `50`, Pro `100`, Ultra unlimited.
 - AI/Image/Voice engine model pickers show dynamic upgrade prompts when premium
   models are outside your current plan.
 - Discord `/vc-join` and `/vc-leave` are currently `Ultra` features.
@@ -41,16 +42,16 @@ Quick reference (context/tokens):
 | Message rate limit (per minute) | `20` | `40` | `100` | `Unlimited` |
 | Max model context | `50` | `75` | `100` | `150` |
 | Max response tokens | `4096` | `8192` | `16384` | `32768` |
-| API access (`/v1/response`, `/v1/image`) | Yes | Yes | Yes | Yes |
-| API streaming (`/v1/response` with `stream: true`) | No | Yes | Yes | Yes |
+| API access (`/v1/response`, `/v1/image`) | No | No | Yes | Yes |
+| API streaming (`/v1/response` with `stream: true`) | No | No | No | Yes |
 | Default model tier access | Free | Free + Plus | Free + Plus + Pro | Free + Plus + Pro + Ultra |
 | Premium model pickers in AI/Image/Voice engines | Limited | Expanded | Expanded more | Full catalog access |
 | Watermark removal | No | Yes | Yes | Yes |
 | Advanced AI flag | No | No | Yes | Yes |
 | Discord `/vc-join` + `/vc-leave` | No | No | No | Yes |
-| Early feature access | No | Yes | Yes | Yes |
+| Voice calling | No | No | No | Yes |
 | VIP support | No | No | No | Yes |
-| Image generations per month | Unlimited | Unlimited | Unlimited | Unlimited |
+| Image generations per month | `20` | `50` | `100` | Unlimited |
 
 <Note>
   These values are enforced by backend tier feature controls and can be updated
@@ -69,7 +70,9 @@ Quick reference (context/tokens):
 
 - Verb creation over your tier cap is rejected.
 - Model context above your cap is clamped or rejected depending on endpoint.
-- Free tier streaming requests return a plan-upgrade error.
+- Public API requests from Free or Plus accounts return a plan-upgrade error.
+- Streaming requests from non-Ultra accounts return a plan-upgrade error.
+- Image generation stops when the account reaches its monthly allowance.
 - Message bursts above tier limits return rate-limit responses.
 
 ## Model access and tiering

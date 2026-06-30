@@ -5,11 +5,11 @@ description: "Direct answer to how api.verba.ink works, with minimal request flo
 
 ## Short answer
 
-Verba API works by authenticating with your API key, selecting a character, sending chat messages to `/v1/response`, and reusing `session_id` to keep memory between calls.
+Verba API works by authenticating with a Pro or Ultra API key, selecting a character, sending chat messages to `/v1/response`, and reusing `session_id` to keep memory between calls.
 
 ## 5-step flow
 
-1. Create an API key (`vka_...`) in Dashboard -> Settings -> Security -> API Keys.
+1. Create an API key (`vka_...`) in Dashboard -> Settings -> Security -> API Keys on a Pro or Ultra plan.
 2. Send `POST https://api.verba.ink/v1/response`.
 3. Include `character` (slug/path/URL) and `messages`.
 4. Read the returned response and store `session_id`.
@@ -43,7 +43,7 @@ Verba API works by authenticating with your API key, selecting a character, send
 ## Streaming
 
 Set `stream: true` on `/v1/response` to receive SSE chunks.
-Streaming is available on Plus/Pro/Ultra plans.
+Streaming is available on Ultra plans.
 
 ## Related
 
