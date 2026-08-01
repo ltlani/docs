@@ -1,0 +1,71 @@
+---
+title: "Magic Builder"
+description: "Create an editable verb draft from a short plain-language prompt."
+---
+
+## When to use it
+
+Magic Builder is the fastest creation path when you know the concept but do not
+want to fill every personality field manually. Open **Create** and choose the
+Magic Builder method. Manual creation remains available for exact field control.
+
+## Build a useful prompt
+
+The prompt accepts up to `500` characters. Include:
+
+- The character's role and goal
+- Two or three defining traits
+- Speaking style or vocabulary
+- Important setting or backstory
+- The audience or use case
+
+Use a suggestion chip for a starting point or **Refine Prompt** to make an
+existing idea more specific.
+
+## Optional tools
+
+- **Web Search** can ground the draft in fresh public information when the
+  concept depends on current facts.
+- **Image Generation** can create visual assets as part of the build.
+
+Keep Web Search off for original characters and static lore. Turn Image
+Generation off if you already have the correct avatar/banner or want to choose
+a specific premium model later.
+
+## What happens after submission
+
+Creation runs as an asynchronous dashboard job. You can return to the dashboard
+while Verba builds the result. When the job finishes, the new verb is a normal,
+editable verb: review its personality, system instructions, visuals, model,
+memory, and visibility before sharing it.
+
+<Warning>
+  Magic Builder produces a draft, not an unchangeable source of truth. Check
+  generated factual claims and remove contradictory personality rules.
+</Warning>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The builder rejected my request">
+    Keep the prompt under `500` characters, remove unsafe or contradictory
+    requirements, and try without optional web/image tools to isolate the failure.
+  </Accordion>
+  <Accordion title="The job takes longer than expected">
+    Web search and image generation add external work. Check the dashboard job
+    state before submitting the same request again.
+  </Accordion>
+  <Accordion title="The result feels generic">
+    Add concrete traits, a speaking pattern, one motivation, and one constraint,
+    then edit the generated personality or create a more specific draft.
+  </Accordion>
+</AccordionGroup>
+
+<CardGroup cols={2}>
+  <Card title="Create your first verb" icon="user" href="/guides/first-verb">
+    Review every part of the resulting verb.
+  </Card>
+  <Card title="Personality playbook" icon="star" href="/guides/personality-playbook">
+    Turn a draft into a consistent personality.
+  </Card>
+</CardGroup>

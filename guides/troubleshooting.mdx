@@ -46,6 +46,12 @@ description: "Fix common Verba issues fast with concrete checks and recovery ste
   <Accordion title="Bot replies in wrong places or too often">
     Remove AI channels with `/remove-channel` and keep mention-only behavior in shared channels.
   </Accordion>
+  <Accordion title="The bot left after an admin or moderation action">
+    Anti-nuke containment saw a privileged bot-account action that was not
+    authorized by Verba or a saved Custom Builder flow. Check Discord audit
+    logs, rotate the token if it was used elsewhere, review permissions, then
+    invite the bot again.
+  </Accordion>
   <Accordion title="/reset fails in server but works in DM">
     Server reset requires admin/server-owner/bot-owner level permission. DM reset is user scoped.
   </Accordion>
@@ -81,7 +87,27 @@ description: "Fix common Verba issues fast with concrete checks and recovery ste
     Retries/backoff are built into the call path, but upstream outages still happen. Retry shortly and keep fallback models available in your plan tier.
   </Accordion>
   <Accordion title="Image generation fails randomly">
-    Provider capacity spikes can cause temporary errors. Retry with a shorter prompt and no reference image first.
+    Confirm the monthly allowance, model tier, and Image Engine toggle. Then
+    retry with Verba Free Image, a shorter prompt, `1:1`, and no reference image
+    to separate configuration from a temporary provider failure.
+  </Accordion>
+</AccordionGroup>
+
+## WhatsApp and Telegram issues
+
+<AccordionGroup>
+  <Accordion title="WhatsApp linking disappears after a restart">
+    Normal restarts retain the gateway's durable linked-device state. If it is
+    disconnected, check whether WhatsApp revoked the linked device or somebody
+    explicitly logged out before attempting a new link.
+  </Accordion>
+  <Accordion title="Telegram token is invalid or already connected">
+    Copy a fresh token from `@BotFather`. A single Telegram token can only be
+    connected to one verb. Revoke and regenerate any token that was exposed.
+  </Accordion>
+  <Accordion title="Telegram bot ignores group messages">
+    Mention or reply to it, or have a group admin use `/activate_channel`.
+    Confirm the bot has permission to read and send messages in that group.
   </Accordion>
 </AccordionGroup>
 
@@ -117,7 +143,9 @@ description: "Fix common Verba issues fast with concrete checks and recovery ste
     Anti-spam protections can block mention floods and invisible-character abuse. Remove unusual hidden characters and retry.
   </Accordion>
   <Accordion title="Uploads fail">
-    Ensure the file is an image and under limit for that surface (for chat message uploads, 5MB max).
+    Current app chat supports images, video, audio, PDF, Word, and common
+    text/code files up to `30MB` per upload. Document text extraction is capped
+    at `20MB`; legacy image-only upload controls still use `5MB`.
   </Accordion>
   <Accordion title="Group invite problems">
     Verify invite code freshness and that owner has not regenerated it recently.
@@ -136,6 +164,7 @@ Contact support with:
 - Exact timestamp (with timezone)
 - Verb ID/vanity URL
 - Surface (`Discord`, `chat`, `API`)
+- Integration details (`WhatsApp` or `Telegram`) when applicable
 - Error text + screenshot
 - Repro steps from clean session
 

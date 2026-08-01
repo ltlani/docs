@@ -99,8 +99,21 @@ Messages can be blocked when they look abusive, including:
 
 ### Upload limits
 
-- Message image uploads: up to `5MB`
-- Supported upload type: images only
+- General chat attachments: up to `30MB` per uploaded file
+- Document text extraction: up to `20MB` per document
+- Up to `4` attachments are analyzed for one model turn
+- Supported uploads include images, video, audio, PDF, Word documents, and
+  common text/code formats
+
+For model understanding, Verba caps extracted text to `7000` characters per
+attachment and `16000` characters total. Video understanding can sample up to
+four frames per attachment and transcribe available audio. Very large or
+unsupported media may still be stored as a normal file without full AI analysis.
+
+<Note>
+  Legacy image-only upload routes still use a `5MB` image limit. The paperclip
+  file uploader in current app chat uses the broader `30MB` attachment path.
+</Note>
 
 ## Reactions, edits, and deletes
 

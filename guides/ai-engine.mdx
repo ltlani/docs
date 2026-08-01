@@ -9,6 +9,7 @@ description: "Tune model behavior, response length, context, and search."
 - Why are responses short or long?
 - How much context and max tokens can my plan use?
 - What does web search actually do?
+- How do streaming and social state change platform replies?
 
 ## Core controls
 
@@ -19,7 +20,9 @@ description: "Tune model behavior, response length, context, and search."
 | Model Context | plan-limited | Number of recent messages included |
 | Reply Style | preset | Voice/format tendency |
 | Multi-message | on/off + delay | Sends split follow-up replies |
+| Response Streaming | on/off | Sends an early partial platform reply and edits it in place |
 | Web search | on/off | Allows live web-grounded replies |
+| Social state | `-5..5`, step `0.25` | Temporary mood and conversation posture |
 
 ## System instructions (behavior prompt)
 
@@ -104,6 +107,31 @@ When enabled:
 
 Use this for natural chat pacing; disable if you want one compact answer.
 
+## Response streaming
+
+When enabled, Discord, WhatsApp, and Telegram can show the beginning of a
+response early and edit that message into the complete answer. This is separate
+from Ultra-only API SSE streaming.
+
+Use it for better perceived speed on long answers. Turn it off when your style
+depends on several intentionally separate messages.
+
+<Card title="Response streaming" icon="bolt" href="/guides/response-streaming">
+  See supported surfaces, fallback behavior, and API differences.
+</Card>
+
+## Social state
+
+The **Social** tab adds eight temporary sliders for willingness to talk,
+irritation, focus, energy, confidence, affection, playfulness, and curiosity.
+Set them manually or enable Auto mode so recent exchanges can move them
+gradually. This layer influences delivery without replacing personality,
+knowledge, memory, or safety rules.
+
+<Card title="Social and emotional state" icon="heart" href="/guides/social-and-emotional-state">
+  Learn the ranges, auto-mode behavior, and memory interaction.
+</Card>
+
 ## Web search behavior
 
 When enabled, Verba may perform model-driven search planning before the final answer.
@@ -146,7 +174,8 @@ Keep it off for:
     Increase max tokens and use a fuller reply style.
   </Accordion>
   <Accordion title="Replies are too slow">
-    Reduce context and disable web search unless needed.
+    Reduce context and disable web search unless needed. Response Streaming can
+    make the reply appear sooner, but does not reduce total generation time.
   </Accordion>
 </AccordionGroup>
 

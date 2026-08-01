@@ -1,6 +1,6 @@
 ---
 title: "Question bank"
-description: "Large question-driven reference generated from backend routes and frontend settings flows."
+description: "Large question-driven reference checked against backend routes and frontend settings flows."
 ---
 
 ## About this page
@@ -19,6 +19,10 @@ answers.
 - Session memory: reuse `session_id` for follow-up calls.
 - Plan limits (context/tokens): Free `50/4096`, Plus `75/8192`, Pro `100/16384`, Ultra `150/32768`.
 - Plan full matrix (`verbs/msg-min/context/max-tokens`): Free `5/20/50/4096`, Plus `10/40/75/8192`, Pro `20/100/100/16384`, Ultra `40/unlimited/150/32768`.
+- Platform streaming: AI Engine toggle for Discord, WhatsApp, and Telegram;
+  separate from Ultra-only API SSE.
+- Telegram: connect a BotFather token; DMs always address the verb, while groups
+  use mention/reply routing or `/activate_channel`.
 
 ## API questions
 
@@ -114,6 +118,9 @@ answers.
   <Accordion title="Why does /generate fail?">
     Image generation may be disabled, prompt invalid, or provider temporarily unavailable.
   </Accordion>
+  <Accordion title="Which aspect ratios does Discord /generate support?">
+    `1:1`, `16:9`, `9:16`, `4:3`, `3:4`, `3:2`, `2:3`, `4:5`, `3:1`, and `21:9`, plus an optional reference attachment.
+  </Accordion>
   <Accordion title="Why does 'The application did not respond' appear?">
     Usually command timeout or permission/runtime failure.
   </Accordion>
@@ -128,6 +135,31 @@ answers.
   </Accordion>
   <Accordion title="Why do only some pings get a reply when many bots are tagged?">
     Multi-bot mention handling intentionally limits responding bots for stability.
+  </Accordion>
+  <Accordion title="Why did the bot leave after a privileged action?">
+    Anti-nuke containment detected an unexplained bot-account admin/moderation
+    action. Review audit logs and token access before inviting it back.
+  </Accordion>
+</AccordionGroup>
+
+## WhatsApp and Telegram questions
+
+<AccordionGroup>
+  <Accordion title="Does WhatsApp survive normal Verba restarts?">
+    Yes. Linked-device credentials are stored durably. Relink only after logout,
+    device revocation, or session invalidation.
+  </Accordion>
+  <Accordion title="How do I connect Telegram?">
+    Create a bot with `@BotFather`, paste the token into the Telegram module,
+    and let Verba validate it, configure the webhook, and register commands.
+  </Accordion>
+  <Accordion title="What Telegram commands are available?">
+    `/help`, `/ping`, `/dashboard`, `/generate`, `/reset`,
+    `/activate_channel`, and `/remove_channel`.
+  </Accordion>
+  <Accordion title="Does platform response streaming require Ultra?">
+    No. The AI Engine toggle edits a Discord, WhatsApp, or Telegram message in
+    place. Only public API SSE with `stream: true` is Ultra-only.
   </Accordion>
 </AccordionGroup>
 
@@ -151,6 +183,15 @@ answers.
   </Accordion>
   <Accordion title="What is auto memory?">
     Optional automatic saving of durable facts from conversation history.
+  </Accordion>
+  <Accordion title="Why does auto memory not create an entry on every chat?">
+    It is intentionally selective: it waits for enough recent user-and-bot
+    context, runs probabilistically, skips duplicates, and can decide that no
+    durable fact is worth storing.
+  </Accordion>
+  <Accordion title="What happens when automatic memory reaches 50 entries?">
+    Verba removes the oldest automatic entry before adding a new one. Manual
+    memories are not removed by that automatic rollover.
   </Accordion>
   <Accordion title="What should auto-memory instructions include?">
     Durable facts to keep; explicit exclusions for temporary/noisy details.
@@ -197,7 +238,22 @@ answers.
     Group owner only.
   </Accordion>
   <Accordion title="Are message image uploads limited?">
-    Yes, chat message image upload path is capped to small file sizes (5MB class limits).
+    The current file uploader supports images, video, audio, PDF, Word, and
+    common text/code formats up to `30MB` each. Document extraction is capped at
+    `20MB`; legacy image-only controls retain a `5MB` limit.
+  </Accordion>
+</AccordionGroup>
+
+## Social-state questions
+
+<AccordionGroup>
+  <Accordion title="What are the social sliders?">
+    Willingness to talk, irritation, focus, energy, confidence, affection,
+    playfulness, and curiosity. Each uses `-5..5` with `0.25` steps.
+  </Accordion>
+  <Accordion title="What does Social Auto mode do?">
+    It gradually adjusts temporary mood from the recent exchange and a small
+    set of important memories, without overriding personality or safety rules.
   </Accordion>
 </AccordionGroup>
 

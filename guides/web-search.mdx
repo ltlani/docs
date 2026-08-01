@@ -1,33 +1,69 @@
 ---
 title: "Web search"
-description: "When to turn it on and when to keep it off."
+description: "How fresh web-grounded answers work and how Verba handles search fallback."
 ---
 
 ## What web search does
 
-Web search lets your verb pull in fresh info when it is needed. It is great for
-news, live data, and things that change fast.
+When Web Search is enabled, Verba can recognize questions that need current or
+uncertain information, run a search, and use the results while composing the
+final answer in the verb's personality.
+
+It is useful for news, live status, current public figures, recent releases,
+prices, and other facts that can change after the model was trained.
+
+## Search path and fallback
+
+Verba uses LangSearch as its primary search provider. If that path is
+unavailable, it can fall back to Brave's public HTML results. When a data-center
+IP is blocked or rate limited, the Brave fallback can retry through a rotating
+proxy pool (up to three proxy attempts).
+
+The model should receive the search results and answer normally. Internal
+`<tool_call>` markup is not intended to appear in a user-facing response.
 
 ## When to use it
 
-- Current events
-- Policies or pricing that change often
-- Fresh releases or updates
+- Current events and status incidents
+- Policies, pricing, schedules, or leadership that changes
+- Recent releases and live product information
+- Questions where an old answer could mislead the user
 
 ## When to skip it
 
 - Roleplay or storytelling
 - Static lore and worldbuilding
-- Anything that should stay consistent
+- Stable facts already stored in Knowledge
+- Latency-sensitive voice conversations
 
 <Note>
-  Web search can cost more and slow replies. Use it only when freshness matters.
+  Search adds network and model-planning latency and can increase credit use.
+  Response Streaming can show text sooner after generation starts, but it
+  cannot remove the time needed to perform the search.
 </Note>
 
 ## Troubleshooting
 
-If results feel noisy, turn web search off and reduce temperature.
+<AccordionGroup>
+  <Accordion title="The bot printed a tool call instead of an answer">
+    Retry once and report the timestamp, verb ID, and surface. That markup is an
+    internal planning format and should be intercepted before sending.
+  </Accordion>
+  <Accordion title="Results are irrelevant">
+    Ask a narrower question with names, location, and date. For stable subjects,
+    turn Web Search off and put the canonical facts in Knowledge instead.
+  </Accordion>
+  <Accordion title="The reply is slow">
+    Search may include a primary attempt and fallbacks. Disable it for requests
+    that do not need fresh information and reduce model context if appropriate.
+  </Accordion>
+</AccordionGroup>
 
-<Card title="AI engine" icon="sliders" href="/guides/ai-engine">
-  Get the tuning knobs right first.
-</Card>
+<CardGroup cols={2}>
+  <Card title="AI engine" icon="sliders" href="/guides/ai-engine">
+    Configure search alongside context, model, and streaming.
+  </Card>
+  <Card title="Memory and knowledge" icon="database" href="/guides/memory-and-knowledge">
+    Store stable facts instead of searching for them every turn.
+  </Card>
+</CardGroup>

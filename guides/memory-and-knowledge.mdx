@@ -73,6 +73,21 @@ Auto-memory settings:
   it detects durable information worth retaining.
 </Note>
 
+Current auto-memory behavior:
+
+- It evaluates a recent window after eligible exchanges rather than writing on
+  every message.
+- It needs enough recent user-and-bot conversation to form a useful memory.
+- It skips short, temporary, duplicate, or low-value information.
+- Automatic memories are capped at `50`; before adding another, Verba removes
+  the oldest automatic entry. Manually created entries are not pruned by this
+  automatic rollover.
+- Similarity checks prevent near-duplicate memories from consuming the list.
+
+This means several normal conversations can pass without a new entry. A full
+automatic list should continue rolling forward instead of becoming permanently
+stuck.
+
 ## Knowledge entry limits
 
 Per entry:
@@ -119,6 +134,18 @@ can edit and save manually.
 | Discord server text | Scoped to bot + guild + channel context |
 | Discord voice chat | Scoped to the active voice session/channel |
 | App group/DM chat | Scoped to group/DM conversation |
+| WhatsApp | Scoped to the active WhatsApp conversation or group |
+| Telegram | Scoped to the current Telegram DM or group chat |
+
+## Memory and social state
+
+Memory and social state solve different problems. Memory stores durable facts;
+social state records how the verb feels or behaves right now. When Social Auto
+mode is enabled, it can consider up to a small set of the most important
+long-term memories while adjusting the sliders gradually.
+
+Do not encode permanent facts only in social-state context. Put the fact in
+memory or knowledge, then use social state for the temporary reaction.
 
 ## What to store where
 
@@ -164,5 +191,8 @@ can edit and save manually.
   </Card>
   <Card title="Bot Settings Reference" icon="book" href="/guides/bot-settings-reference">
     Field-by-field guide for all dashboard settings and limits.
+  </Card>
+  <Card title="Social and Emotional State" icon="heart" href="/guides/social-and-emotional-state">
+    Add temporary mood without rewriting memory.
   </Card>
 </CardGroup>

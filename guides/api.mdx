@@ -1,6 +1,6 @@
 ---
 title: "Public API v1"
-description: "Use API keys to talk to characters outside Discord."
+description: "Use API keys to integrate Verba characters into your own apps and workflows."
 ---
 
 ## Base URL
@@ -41,6 +41,12 @@ Minimal text request:
 - Session ID format: optional, max `128` chars, allowed chars `A-Z a-z 0-9 : _ -`
 - Image URL limit: up to `4` combined URLs
 - Tool limits: up to `8` tool definitions, up to `2` executed tool calls per request
+
+<Note>
+  API SSE is separate from the AI Engine's Response Streaming toggle for
+  Discord, WhatsApp, and Telegram. The platform toggle does not change API plan
+  requirements.
+</Note>
 
 ## Request limits (fast reference)
 

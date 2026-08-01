@@ -18,6 +18,7 @@ It supports:
 - Image generation
 - Voice messages
 - Reply context from WhatsApp replies
+- Edit-in-place response streaming
 - Switching or disconnecting the connected verb
 
 ## Before you start
@@ -33,6 +34,11 @@ You need:
   You do not need to paste a token or create a WhatsApp bot yourself. The module
   uses the shared Verba WhatsApp number and links each chat to the verb you pick.
 </Note>
+
+The shared gateway stores its WhatsApp linked-device state durably. A normal
+Verba server or container restart should not require users to relink WhatsApp.
+Relinking is only needed after an explicit logout, revoked linked device, or
+invalidated WhatsApp session.
 
 ## Connect a verb to WhatsApp
 
@@ -87,6 +93,13 @@ When you reply to a specific WhatsApp message, Verba includes that quoted messag
 as context. This helps the verb understand what "that", "this one", or "the
 image above" refers to.
 
+### Response streaming
+
+When Response Streaming is enabled in the verb's AI Engine, WhatsApp can receive
+the first useful part of the reply early and then see that message updated as
+generation continues. If streaming is unavailable before any partial text is
+sent, Verba falls back to a normal complete reply.
+
 ## WhatsApp commands
 
 | Command | What it does |
@@ -129,6 +142,10 @@ if they want to change or stop the connected verb.
     Send `/disconnect`. The chat will detach from the verb until you connect one
     again.
   </Accordion>
+  <Accordion title="Do I need to relink after a Verba restart?">
+    Normally, no. Linked-device credentials persist across ordinary restarts.
+    Relink only if WhatsApp logged the shared gateway out or revoked its device.
+  </Accordion>
 </AccordionGroup>
 
 <CardGroup cols={2}>
@@ -143,5 +160,8 @@ if they want to change or stop the connected verb.
   </Card>
   <Card title="Troubleshooting" icon="life-ring" href="/guides/troubleshooting">
     Fast fixes for common account, chat, and module issues.
+  </Card>
+  <Card title="Response streaming" icon="bolt" href="/guides/response-streaming">
+    See how early partial replies are finalized.
   </Card>
 </CardGroup>

@@ -20,7 +20,8 @@ description: "High-frequency questions across API, Discord, memory, billing, and
     Credits cover model inference and processing. Longer context and larger outputs consume more.
   </Accordion>
   <Accordion title="Can I use Verba outside Discord?">
-    Yes on Pro and Ultra plans. Use the public API at `api.verba.ink` with your API key.
+    Yes. Use Verba app chat, the shared WhatsApp module, or a connected Telegram
+    bot. Pro and Ultra accounts can also use the public API at `api.verba.ink`.
   </Accordion>
   <Accordion title="Do I need a paid plan to use the API?">
     Yes. Public API access is available on Pro and Ultra plans.
@@ -59,6 +60,44 @@ description: "High-frequency questions across API, Discord, memory, billing, and
   <Accordion title="Why does /reset fail in server?">
     Server reset requires admin/server-owner/bot-owner permission.
   </Accordion>
+  <Accordion title="What happens if somebody misuses my connected bot token?">
+    Verba monitors privileged actions by the bot account. Unexplained admin or
+    moderation actions trigger fail-closed containment and the bot leaves the
+    affected server; lower-risk messages/reactions are removed where possible.
+    Rotate any exposed token immediately.
+  </Accordion>
+</AccordionGroup>
+
+## WhatsApp and Telegram FAQ
+
+<AccordionGroup>
+  <Accordion title="Does WhatsApp need to be relinked after every restart?">
+    No. The shared gateway's linked-device state persists across normal server
+    restarts. Relink only after logout, device revocation, or session invalidation.
+  </Accordion>
+  <Accordion title="How do I connect Telegram?">
+    Create a bot with `@BotFather`, paste its token in the Telegram module, and
+    add it to a group or open its DM. Verba validates the token, sets a secure
+    webhook, and registers its commands.
+  </Accordion>
+  <Accordion title="Why does Telegram answer in DMs but not my group?">
+    Mention it, reply to one of its messages, or have a group admin run
+    `/activate_channel`.
+  </Accordion>
+</AccordionGroup>
+
+## Streaming and social-state FAQ
+
+<AccordionGroup>
+  <Accordion title="Is platform response streaming Ultra-only?">
+    No. The AI Engine toggle controls edit-in-place replies on Discord,
+    WhatsApp, and Telegram. Ultra-only streaming refers to public API SSE with
+    `stream: true`.
+  </Accordion>
+  <Accordion title="Does social state rewrite personality or memory?">
+    No. It is a temporary mood layer. Auto mode can consider important memories,
+    but saved personality, facts, system instructions, and safety remain authoritative.
+  </Accordion>
 </AccordionGroup>
 
 ## Memory and knowledge FAQ
@@ -72,6 +111,12 @@ description: "High-frequency questions across API, Discord, memory, billing, and
   </Accordion>
   <Accordion title="Can Verba auto-save memory from chats?">
     Yes, with Auto Memory enabled and instructions configured.
+  </Accordion>
+  <Accordion title="Why has Auto Memory not saved anything recently?">
+    It does not write on every turn. It waits for enough recent conversation,
+    skips temporary or duplicate facts, and only sometimes attempts a memory.
+    At 50 automatic entries it rolls out the oldest automatic entry instead of
+    freezing; manual entries are preserved.
   </Accordion>
   <Accordion title="Why is it not using my docs correctly?">
     Improve knowledge entry quality (clear title/category/content), reduce ambiguity, and add training examples for recurring question patterns.
@@ -144,6 +189,12 @@ description: "High-frequency questions across API, Discord, memory, billing, and
   </Card>
   <Card title="Question Bank" icon="book-open" href="/guides/question-bank">
     Larger question-driven reference generated from backend/frontend behavior.
+  </Card>
+  <Card title="Telegram Module" icon="paper-plane" href="/guides/telegram">
+    Connect Telegram and understand its commands and group routing.
+  </Card>
+  <Card title="Response Streaming" icon="bolt" href="/guides/response-streaming">
+    Compare platform streaming with public API SSE.
   </Card>
 </CardGroup>
 

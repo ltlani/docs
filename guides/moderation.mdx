@@ -1,30 +1,58 @@
 ---
 title: "Content moderation"
-description: "Keep your community safe with automated checks."
+description: "What Verba checks when you create or update a verb, group, or profile asset."
 ---
 
-## Why this exists
+## Where moderation runs
 
-Moderation helps keep communities safe. It blocks harmful content while staying
-permissive for normal creative use.
+Verba validates character text during creation and relevant profile updates.
+The combined check can include the name, description, age, personality,
+backstory, beliefs, preferences, system instructions, tags, knowledge entries,
+and training examples.
 
-## What gets checked
+Image moderation runs on uploaded verb avatars and banners, account profile
+assets, and group avatars/banners. File type and size validation happens before
+or alongside content analysis.
+
+## Main blocked categories
+
+- Sexual or exploitative content involving minors
+- Hate speech, protected-group violence, and extremist promotion
+- Characters designed to provide operational illegal-activity assistance
+- Extreme graphic violence, hate symbols, or other prohibited image content
+
+The checks are designed to preserve normal creative, fantasy, historical,
+prevention, reporting, and survivor-support contexts where they do not promote
+the prohibited behavior.
+
+## Age-aware rules
+
+Characters can represent different ages, but minors have stricter content
+rules. A character under `18` cannot contain sexualized content, and a character
+under `16` cannot be configured to use profanity/slang.
+
+## Supported profile-image formats
+
+Use JPG/JPEG, PNG, GIF, or WEBP. Dashboard upload routes also enforce their
+surface-specific size limits before saving the final asset.
+
+## If content is blocked
+
+1. Read the returned reason; it usually identifies the affected category.
+2. Remove ambiguous phrasing or imagery and try a simpler safe version.
+3. Keep prevention/reporting context explicit when discussing sensitive topics.
+4. Contact support with the timestamp and screenshot if safe content is still blocked.
+
+<Warning>
+  Do not repeatedly submit prohibited material to probe the filters. Serious or
+  repeated violations may be logged for platform-safety review.
+</Warning>
 
 <CardGroup cols={2}>
-  <Card title="Profile images" icon="image">
-    Avatars and banners are scanned before they go live.
+  <Card title="Visual identity" icon="image" href="/guides/visual-identity">
+    Prepare avatars and banners that pass format and layout checks.
   </Card>
-  <Card title="Character content" icon="file">
-    Personality text is checked for unsafe themes.
+  <Card title="Account and security" icon="lock" href="/guides/account-and-security">
+    Review privacy, uploads, and account protections.
   </Card>
 </CardGroup>
-
-## If something gets blocked
-
-- Read the error message.
-- Tweak the content.
-- Try again with a simpler version.
-
-<Note>
-  We would rather let safe content through than block good work by mistake.
-</Note>

@@ -10,8 +10,18 @@ how your verb is introduced and how it speaks.
 
 <Info>
   Keep the description short and concrete. Focus on tone, role, and what the
-  verb helps with.
+verb helps with.
 </Info>
+
+### Magic Builder or manual creation
+
+Magic Builder accepts a plain-language description (up to `500` characters)
+and creates a draft asynchronously. You can optionally let it use web search
+and generate visuals. Use **Refine Prompt** or a suggestion chip if you want
+help making the request more specific.
+
+Choose manual creation when you already know the exact field values you want.
+Both paths create a normal verb that you can edit afterward.
 
 ## 2. Build a visual identity
 
@@ -67,8 +77,14 @@ defaults, then iterate while chatting.
 
 <Tip>
   If responses feel too generic, raise temperature slightly. If they drift off
-  topic, lower it and reduce top-p.
+topic, lower it and reduce top-p.
 </Tip>
+
+The AI Engine also contains:
+
+- **Response Streaming** for edit-in-place replies on messaging platforms.
+- **Social** controls for mood and conversation posture.
+- Web search, reply style, multi-message timing, and context controls.
 
 ## 5. Test and iterate
 

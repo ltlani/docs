@@ -1,0 +1,63 @@
+---
+title: "Discord anti-nuke protection"
+description: "How Verba contains unauthorized actions performed with a connected Discord bot token."
+---
+
+## What it protects against
+
+Verba monitors actions performed by the connected bot account, including
+actions initiated outside Verba with the same token. The goal is to prevent a
+stolen or misused token from turning a hosted verb into a server-nuking bot.
+
+## Privileged actions
+
+For unexplained administrative or moderation actions, protection is
+fail-closed: Verba blocks the in-process request where possible and leaves the
+Discord server on the first detected unauthorized action.
+
+Guarded categories include:
+
+- Channel, thread, role, and guild changes
+- Bans, kicks, prunes, timeouts, and member-role changes
+- Permission overwrites, invites, and webhooks
+- Emoji, sticker, soundboard, scheduled-event, stage, AutoMod, and onboarding changes
+- Message deletion, pinning, integrations, and application-command permission changes
+
+Audit-log monitoring also detects relevant actions performed with the bot token
+outside the normal Verba runtime.
+
+## Lower-risk actions
+
+Unauthorized lower-risk self-actions, such as messages, edits, or reactions,
+are removed or reverted where Discord permits instead of immediately making the
+bot leave the server.
+
+<Note>
+  A message may be deleted after detection, but recipients may already have
+  seen it. Discord does not provide a universal way to undo that exposure.
+</Note>
+
+## Command Builder actions
+
+Verba and the Discord Custom Builder mark expected actions as authorized before
+executing them. Legitimate workflows can therefore create channels, moderate
+members, send messages, and perform other configured actions without triggering
+anti-nuke containment.
+
+## What this does not replace
+
+Anti-nuke is defense in depth, not a reason to over-permission a bot.
+
+- Grant only the Discord permissions the verb needs.
+- Never share or commit a bot token.
+- Rotate a token immediately if it may be exposed.
+- Review Discord audit logs after suspicious activity.
+
+<CardGroup cols={2}>
+  <Card title="Discord deployment" icon="discord" href="/guides/discord">
+    Connect and permission a Discord bot safely.
+  </Card>
+  <Card title="Custom Builder" icon="wand-magic-sparkles" href="/guides/custom-builder">
+    Build authorized commands and automations.
+  </Card>
+</CardGroup>

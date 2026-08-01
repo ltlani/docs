@@ -12,6 +12,7 @@ description: "Connect a verb to Discord and configure how, where, and when it re
 - How do I make bots talk to each other?
 - Why does `/reset` work in DMs but fail in servers?
 - Why does the bot say "application did not respond"?
+- How does anti-nuke protection handle unauthorized bot-token actions?
 
 ## Before you connect
 
@@ -48,6 +49,17 @@ You need:
   token is already attached to another verb, Verba will reject the duplicate
   link attempt until it is removed or re-linked correctly.
 </Note>
+
+### Temporary token-rotation reward
+
+When the promotion is visible in the Discord module, an eligible account can
+claim it once by resetting the token for the **same Discord application** and
+reconnecting the new token. The current campaign grants two days of effective
+Plus access and `0.17` temporary credits. The reward and any unused promotional
+credits expire after two days; connecting a different bot does not qualify.
+
+This is a temporary campaign. If the module no longer shows the offer, do not
+assume it is still available.
 
 ## How response routing works
 
@@ -96,8 +108,9 @@ Current controls:
 - Poll Creation
 - Multi-Message Replies
 
-All of these are enabled by default for new bots. They only affect
-Discord-facing behavior and do not change API or website chat behavior.
+All of these are enabled by default for new bots. Emoji, GIF, sticker, custom
+emoji, and poll controls are Discord-specific. Multi-message behavior is a
+shared response setting and can also affect supported non-Discord surfaces.
 
 ## Mention mode vs AI-channel mode
 
@@ -177,6 +190,13 @@ Discord replies are not blind to the room anymore.
 This helps replies, reactions, stickers, GIFs, and polls fit the current room
 instead of sounding detached from the channel.
 
+## Response streaming
+
+Turn on **Response Streaming** in the AI Engine to send a useful partial reply
+early and edit the same Discord message until the answer is complete. This is
+independent of multi-message mode: streaming updates one in-progress message,
+while multi-message mode intentionally creates separate final messages.
+
 ## Permissions behavior
 
 - `/activate-channel` and `/remove-channel` require Administrator permission.
@@ -227,6 +247,22 @@ Use the custom builder when you want your connected Verba bot to behave more lik
   The builder is manual-save. Unsaved canvas changes are local and do not go live until you save.
 </Note>
 
+## Anti-nuke protection
+
+Connected bots monitor their own privileged actions. Verba and saved Custom
+Builder flows authorize expected actions before execution. An unexplained
+administrative or moderation action is blocked where possible and causes the
+bot to leave the affected server; lower-risk unauthorized messages or reactions
+are removed or reverted where Discord permits.
+
+This also covers relevant actions detected through Discord audit logs when the
+same bot token is used outside Verba. Keep permissions minimal and rotate any
+token that may have been exposed.
+
+<Card title="Discord anti-nuke protection" icon="shield-halved" href="/guides/discord-safety">
+  See guarded action categories, containment behavior, and limitations.
+</Card>
+
 ## Typical failure patterns
 
 <AccordionGroup>
@@ -263,5 +299,8 @@ Use the custom builder when you want your connected Verba bot to behave more lik
   </Card>
   <Card title="Troubleshooting" icon="life-ring" href="/guides/troubleshooting">
     Fast fix checklist for connection failures, timeouts, and no-response bugs.
+  </Card>
+  <Card title="Discord Anti-Nuke" icon="shield-halved" href="/guides/discord-safety">
+    Understand containment for unauthorized token actions.
   </Card>
 </CardGroup>

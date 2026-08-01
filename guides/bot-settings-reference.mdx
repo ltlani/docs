@@ -1,6 +1,6 @@
 ---
 title: "Bot settings reference"
-description: "Field-by-field guide to AI, memory, knowledge, training, voice, and Discord settings."
+description: "Field-by-field guide to AI, social state, memory, media, and platform settings."
 ---
 
 ## Why this page exists
@@ -15,10 +15,11 @@ Use it when you need exact ranges, limits, and behavior implications.
 | `temperature` | `0..2` | Creativity/randomness |
 | `top_p` | `0..1` | Diversity control |
 | `modelContext` | plan-capped | Number of history messages considered |
-| `replyStyle` | preset enum | `default`, `short`, `creative`, `crazy`, `human` |
+| `replyStyle` | preset enum | `default`, `short`, `roleplay`, `crazy`, `human` (`creative` is a legacy alias for `roleplay`) |
 | `webSearch` | boolean | Enables web-grounded answers |
 | `multiMessageEnabled` | boolean | Split response into multiple messages |
 | `multiMessageDelayMs` | `0..10000` ms | Delay between split parts |
+| `responseStreamingEnabled` | boolean | Edit-in-place partial replies on Discord, WhatsApp, and Telegram |
 
 ### Plan caps
 
@@ -43,6 +44,25 @@ Autonomous frequency intent:
 - `default`: occasional low-key chime-ins
 - `active`: joins more often without turning everything into spam
 - `chaotic`: loosest filter, most willing to stir up banter
+
+## Social state settings
+
+`socialState.autoEnabled` lets Verba update temporary mood from recent
+conversations. `socialState.context` accepts up to `500` characters.
+
+All eight numeric values use `-5..5` with `0.25` steps:
+
+- `willingnessToTalk`
+- `irritation`
+- `focus`
+- `energy`
+- `confidence`
+- `affection`
+- `playfulness`
+- `curiosity`
+
+Auto mode applies gradual, rate-limited changes and may consider a small set of
+high-importance memories. It does not override system instructions or safety.
 
 ## Training settings
 
@@ -105,6 +125,9 @@ Voice cloning:
 - `imageGeneration` toggle controls whether image commands/flows are active.
 - `imageModel` selection is tier-aware.
 - Non-eligible model selections can be automatically downgraded to allowed tiers.
+- **Verba Free Image** is currently backed by GPT Image 1.
+- Interactive generation supports square, portrait, landscape, banner, and
+  explicit aspect-ratio presets.
 
 ## Discord module settings
 
@@ -146,6 +169,22 @@ Conversation scope notes:
 - Discord server text history is scoped to the current channel, not the whole guild
 - Discord voice chat uses the active connected voice session/channel context
 
+## WhatsApp module settings
+
+- The shared Verba number uses a secure authorization link to choose a verb.
+- Text, images, voice, reply context, image generation, memory, and platform
+  response streaming are supported.
+- `/help`, `/status`, `/switch`, and `/disconnect` manage a conversation.
+
+## Telegram module settings
+
+- Connect a BotFather token; Verba validates and encrypts it.
+- DMs always address the verb. Groups require a mention/reply unless activated.
+- `/activate_channel`, `/remove_channel`, `/reset`, `/generate`, `/dashboard`,
+  `/ping`, and `/help` are registered.
+- Photos/vision, memory, web search, social state, image generation, and
+  edit-in-place response streaming are supported.
+
 ## Custom messages settings
 
 Customizable response strings include:
@@ -182,5 +221,11 @@ If a save fails, check browser console + response payload first, then compare ag
   </Card>
   <Card title="Memory and Knowledge" icon="database" href="/guides/memory-and-knowledge">
     How persistence layers interact in real usage.
+  </Card>
+  <Card title="Telegram Module" icon="paper-plane" href="/guides/telegram">
+    Connect and operate a Telegram bot.
+  </Card>
+  <Card title="Social State" icon="heart" href="/guides/social-and-emotional-state">
+    Configure temporary mood and Auto mode.
   </Card>
 </CardGroup>

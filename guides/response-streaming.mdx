@@ -1,0 +1,56 @@
+---
+title: "Response streaming"
+description: "Send the beginning of a reply early, then edit it in place as generation continues."
+---
+
+## What the toggle does
+
+Turn on **Response Streaming** in **Dashboard -> Verb -> AI Engine**. On
+Discord, WhatsApp, and Telegram, Verba sends the first useful part of a reply
+as soon as it is available, then edits that same message until the final text
+is complete.
+
+This makes long replies feel faster without leaving duplicate partial messages
+behind. The completed model response remains the authoritative final message.
+
+## Supported surfaces
+
+| Surface | Behavior |
+| --- | --- |
+| Discord | Sends one initial message, then edits it in place |
+| WhatsApp | Sends one initial message, then updates it as supported by the gateway |
+| Telegram | Sends one initial message, then edits it in place |
+| Verba app chat | Uses its existing live chat/WebSocket response flow |
+| Public API | Uses separate SSE behavior described below |
+
+## Platform streaming vs API streaming
+
+These are two different features:
+
+- The AI Engine toggle controls platform replies for the connected verb.
+- `POST /v1/response` with `stream: true` uses Server-Sent Events (SSE) and is
+  currently an Ultra API feature.
+
+Enabling the platform toggle does not enable API SSE on a lower plan.
+
+## Reliability behavior
+
+Verba waits for a useful partial sentence before showing the first update and
+throttles later edits so it does not hammer platform APIs. If a provider cannot
+stream before anything becomes visible, Verba falls back to the normal
+single-message response path.
+
+<Note>
+  Streaming improves perceived speed; it does not make the model finish sooner.
+  Web search, large context windows, and large outputs can still increase total latency.
+</Note>
+
+## When to turn it off
+
+- You only want final, complete messages.
+- A platform or proxy is aggressively rate limiting message edits.
+- Your verb uses multi-message roleplay where separate messages are intentional.
+
+<Card title="AI engine settings" icon="sliders" href="/guides/ai-engine">
+  Configure response streaming, context, reply style, and web search together.
+</Card>

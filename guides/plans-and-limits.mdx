@@ -11,7 +11,8 @@ description: "Complete plan matrix for premium features, usage limits, and API b
 - Plus: `10` verbs, `40` msg/min, `75` context, `8192` max tokens.
 - Pro: `20` verbs, `100` msg/min, `100` context, `16384` max tokens.
 - Ultra: `40` verbs, unlimited msg/min, `150` context, `32768` max tokens.
-- Streaming (`stream: true`) is available on Ultra.
+- Public API SSE (`stream: true`) is available on Ultra. The AI Engine's
+  Discord/WhatsApp/Telegram response-streaming toggle is a separate feature.
 - Image generation monthly allowance: Free `20`, Plus `50`, Pro `100`, Ultra unlimited.
 - AI/Image/Voice engine model pickers show dynamic upgrade prompts when premium
   models are outside your current plan.
@@ -44,6 +45,7 @@ Quick reference (context/tokens):
 | Max response tokens | `4096` | `8192` | `16384` | `32768` |
 | API access (`/v1/response`, `/v1/image`) | No | No | Yes | Yes |
 | API streaming (`/v1/response` with `stream: true`) | No | No | No | Yes |
+| Platform edit-in-place streaming | Yes | Yes | Yes | Yes |
 | Default model tier access | Free | Free + Plus | Free + Plus + Pro | Free + Plus + Pro + Ultra |
 | Premium model pickers in AI/Image/Voice engines | Limited | Expanded | Expanded more | Full catalog access |
 | Watermark removal | No | Yes | Yes | Yes |
@@ -72,6 +74,7 @@ Quick reference (context/tokens):
 - Model context above your cap is clamped or rejected depending on endpoint.
 - Public API requests from Free or Plus accounts return a plan-upgrade error.
 - Streaming requests from non-Ultra accounts return a plan-upgrade error.
+- Platform response streaming does not use the public API SSE entitlement.
 - Image generation stops when the account reaches its monthly allowance.
 - Message bursts above tier limits return rate-limit responses.
 

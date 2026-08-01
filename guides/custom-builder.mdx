@@ -349,6 +349,17 @@ These are intended as starting points you can customize, not fixed templates.
 
 This matters if you are building advanced bots.
 
+### Anti-nuke authorization
+
+The runtime marks expected Custom Builder actions as authorized before it asks
+Discord to perform them. This lets saved workflows moderate members, create or
+delete channels, update roles, send messages, and perform other configured
+actions without triggering Verba's anti-nuke containment.
+
+Actions performed with the same bot token outside Verba are not automatically
+trusted. Review the [Discord anti-nuke guide](/guides/discord-safety) before
+granting broad permissions.
+
 ### Important limitation: execution is still linear
 
 The current compiler/runtime still executes projects in a **linear sequence**.
@@ -444,5 +455,8 @@ For reliable advanced systems:
   </Card>
   <Card title="Discord Command Reference" icon="terminal" href="/guides/discord-command-reference">
     Default built-in Verba slash commands and permission behavior.
+  </Card>
+  <Card title="Discord Anti-Nuke" icon="shield-halved" href="/guides/discord-safety">
+    Learn how builder actions are authorized and external actions are contained.
   </Card>
 </CardGroup>

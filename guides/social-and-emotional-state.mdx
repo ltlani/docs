@@ -1,0 +1,73 @@
+---
+title: "Social and emotional state"
+description: "Give a verb a temporary mood and let conversations influence it without rewriting its personality."
+---
+
+## What social state is
+
+Social state is a temporary layer on top of the saved personality. It helps
+explain why a verb is more talkative, focused, warm, or irritated right now
+without changing its permanent instructions, knowledge, or facts.
+
+Open **Dashboard -> Verb -> AI Engine -> Social** to configure it.
+
+## Sliders
+
+Every slider runs from `-5` to `5` in quarter steps (`0.25`). Zero is neutral.
+
+| Slider | Low end | High end |
+| --- | --- | --- |
+| Willingness to talk | Reserved | Chatty |
+| Irritation | Patient | Irritated |
+| Focus | Distracted | Locked in |
+| Energy | Tired | Energetic |
+| Confidence | Unsure | Confident |
+| Affection | Distant | Warm |
+| Playfulness | Serious | Playful |
+| Curiosity | Uninterested | Curious |
+
+You can also add up to `500` characters of context explaining the current
+state, such as what happened or who it relates to.
+
+## Manual mode
+
+In manual mode, the values stay where you set them until you change them. Use
+this for events, roleplay scenes, or a deliberate support tone.
+
+## Auto mode
+
+In auto mode, Verba can gradually adjust the sliders after conversations on
+app chat, Discord, WhatsApp, and Telegram. It considers the recent exchange and
+a small set of important long-term memories.
+
+Auto changes are intentionally gradual: a normal update moves a value by no
+more than about one point, and updates are rate limited so the mood does not
+thrash between messages.
+
+<Warning>
+  Social state influences delivery; it does not override saved personality,
+  factual knowledge, safety rules, or system instructions.
+</Warning>
+
+## How memory and mood work together
+
+Memory stores durable facts. Social state describes the verb's current posture.
+For example, a memory may store what happened and the state can record reduced
+focus or increased irritation. Auto mode can use high-importance memories as
+context, but it does not rewrite those memories.
+
+## Good uses
+
+- Make a usually energetic character temporarily tired.
+- Let repeated helpful exchanges build warmth.
+- Represent distraction during an ongoing story event.
+- Make a support verb more focused during an incident.
+
+<CardGroup cols={2}>
+  <Card title="Memory and knowledge" icon="database" href="/guides/memory-and-knowledge">
+    Decide what should persist and what should remain temporary.
+  </Card>
+  <Card title="AI engine settings" icon="sliders" href="/guides/ai-engine">
+    Tune the model settings that social state works alongside.
+  </Card>
+</CardGroup>

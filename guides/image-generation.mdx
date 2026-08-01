@@ -1,39 +1,86 @@
 ---
 title: "Image generation"
-description: "Let your verb create visuals on demand."
+description: "Choose an image model, use reference images, and generate the right aspect ratio."
 ---
 
 ## Turn it on
 
-Enable image generation when you want your verb to respond with visuals. This
-is great for inspiration, mood boards, or quick mockups.
+Open **Dashboard -> Verb -> Image Engine** and enable image generation. The
+selected model is used by app chat and supported platform commands such as
+Discord `/generate` and Telegram `/generate`.
+
+Verba's image generation catalog is Puter-backed. Users do not need to provide
+an Airforce account, an image-provider API key, or a separate provider login.
+
+## Free model
+
+**Verba Free Image** is the permanent user-facing name of the free option. It
+is currently backed by **GPT Image 1** and is listed at `0` credits per image.
+
+<Note>
+  Provider mappings and the premium catalog can change over time. The Image
+  Engine in the dashboard is the source of truth for models currently available
+  to your account.
+</Note>
+
+## Aspect ratios
+
+Ask for a named orientation such as `square`, `landscape`, `portrait`,
+`banner`, or `ultrawide`, or choose an explicit ratio.
+
+| Ratio | Working size | Good for |
+| --- | --- | --- |
+| `1:1` | `1024x1024` | Avatars, square posts |
+| `16:9` | `1344x768` | Landscape and widescreen |
+| `9:16` | `768x1344` | Stories and phone wallpapers |
+| `4:3` | `1152x896` | Classic landscape |
+| `3:4` | `896x1152` | Classic portrait |
+| `3:2` | `1216x832` | Photo landscape |
+| `2:3` | `832x1216` | Photo portrait |
+| `5:4` | `1152x896` | Compact landscape |
+| `4:5` | `896x1152` | Social portrait |
+| `2:1` | `1408x704` | Wide banners |
+| `1:2` | `704x1408` | Tall posters |
+| `3:1` | `1536x512` | Extra-wide banners |
+| `21:9` | `1536x640` | Ultrawide scenes |
+
+Model providers may round or adapt a requested size to the nearest supported
+resolution while preserving the intended orientation.
+
+## Discord and Telegram commands
+
+Discord `/generate` accepts a required prompt, an optional aspect-ratio choice,
+and an optional reference attachment. Telegram accepts `/generate <prompt>` and
+uses the configured image model; conversational instructions can provide ratio
+context where supported.
+
+Verba can use up to four reference images internally. Use one clear reference
+when likeness or composition matters; more references can make the instruction
+ambiguous.
 
 ## Prompt tips
 
-- Describe subject, style, and mood.
-- Add a few details, then stop.
-- If results drift, simplify the prompt.
+- Lead with the subject and action.
+- Add medium/style, lighting, composition, and mood.
+- State the intended ratio or destination.
+- Say what must remain from a reference image.
+- Remove conflicting styles if results drift.
 
 <AccordionGroup>
   <Accordion title="Example prompts">
-    - "Moody neon alley, rain, cyberpunk, cinematic"
-    - "Soft watercolor landscape, sunrise, warm tones"
-    - "Minimal logo concept, flat, modern"
+    - `Moody neon alley in rain, cinematic cyberpunk, 16:9`
+    - `Soft watercolor mountain sunrise, warm tones, 3:2`
+    - `Minimal flat logo mark, centered, transparent-looking background, 1:1`
   </Accordion>
-  <Accordion title="Common mistakes">
-    - Overly long prompts
-    - Too many styles at once
-    - Unclear subject
+  <Accordion title="Why generation can fail">
+    The monthly allowance may be exhausted, the selected model may require a
+    higher plan, the prompt/reference may be rejected, or the upstream provider
+    may be temporarily unavailable. Retry once with a shorter prompt and no
+    reference image to isolate the cause.
   </Accordion>
 </AccordionGroup>
 
-<Note>
-  Image generation uses credits. Keep it off if you do not need it.
-</Note>
-
 ## Monthly allowances
-
-Image generation also has a monthly allowance based on the verb owner's plan.
 
 | Plan | Image generations per month |
 | --- | --- |
@@ -42,17 +89,71 @@ Image generation also has a monthly allowance based on the verb owner's plan.
 | Pro | `100` |
 | Ultra | Unlimited |
 
-Allowances reset automatically each monthly cycle. If an account reaches its
-monthly allowance, image generation is blocked until the next reset or a plan
-upgrade.
+Allowances reset with the monthly cycle. Per-image credit charges are separate
+from the monthly count and depend on the selected model.
 
-## Premium image model access
+## Current model catalog and unit prices
 
-Image model availability is also plan-based.
+Prices below are dashboard credit units **per image**. The catalog is sorted by
+minimum plan and price; check the Image Engine before relying on a model in an
+automated workflow.
 
-If your current plan does not include a selected premium image model, the Image
-Engine shows an upgrade prompt with the number of additional premium image
-models available on higher tiers.
+| Minimum plan | Model | Credits/image |
+| --- | --- | ---: |
+| Free | Verba Free Image (GPT Image 1) | `0` |
+| Plus | DreamShaper | `0.0006` |
+| Plus | Juggernaut Lightning FLUX | `0.0017` |
+| Plus | Stable Diffusion 3 Medium | `0.0019` |
+| Plus | Stable Diffusion XL 1.0 | `0.0019` |
+| Plus | FLUX Schnell | `0.0027` |
+| Plus | HiDream I1 Fast | `0.0032` |
+| Plus | HiDream I1 Dev | `0.0045` |
+| Plus | Juggernaut Pro FLUX | `0.0049` |
+| Plus | GPT Image 1 Mini | `0.0050` |
+| Plus | Qwen Image | `0.0058` |
+| Plus | GPT Image 2 | `0.0059` |
+| Plus | HiDream I1 Full | `0.0090` |
+| Plus | GPT Image 1.5 | `0.0090` |
+| Pro | Leonardo Lucid Origin | `0.0167` |
+| Pro | Seedream 3.0 | `0.018` |
+| Pro | Grok Imagine Image | `0.020` |
+| Pro | Imagen 4 Fast | `0.020` |
+| Pro | FLUX.1 Krea Dev | `0.025` |
+| Pro | FLUX 2 Klein 4B | `0.030` |
+| Pro | FLUX 2 Klein 9B Base | `0.030` |
+| Pro | Wan 2.6 Image | `0.030` |
+| Pro | Seedream 4.0 | `0.030` |
+| Pro | FLUX 2 Flex | `0.030` |
+| Pro | FLUX 2 Pro | `0.030` |
+| Pro | FLUX 2 Dev | `0.030` |
+| Pro | Leonardo Phoenix 1.0 | `0.038` |
+| Pro | Gemini 2.5 Flash Image | `0.039` |
+| Pro | Qwen Image 2.0 | `0.040` |
+| Pro | FLUX 1.1 Pro | `0.040` |
+| Pro | FLUX.1 Kontext Pro | `0.040` |
+| Pro | Imagen 4 | `0.040` |
+| Pro | Imagen 4 Preview | `0.040` |
+| Ultra | Grok Imagine Image Quality | `0.050` |
+| Ultra | Imagen 4 Ultra | `0.0602` |
+| Ultra | Ideogram 3.0 | `0.0602` |
+| Ultra | Gemini 3.1 Flash Image Preview | `0.067` |
+| Ultra | FLUX 2 Max | `0.070` |
+| Ultra | Qwen Image 2.0 Pro | `0.080` |
+| Ultra | FLUX.1 Kontext Max | `0.080` |
+| Ultra | Gemini 3 Pro Image Preview | `0.1351` |
 
-Use this as a quick check before upgrading: it tells you whether you are blocked
-by credits, by plan access, or by the model catalog tied to your current tier.
+## Public API limitation
+
+`POST /v1/image` is intentionally narrower than the interactive Image Engine:
+it currently accepts `1024x1024`, a prompt up to `1500` characters, `url`
+response format, and up to four image URLs. Do not send the platform ratio
+presets to that endpoint unless its API reference is updated to support them.
+
+<CardGroup cols={2}>
+  <Card title="Plans and limits" icon="gauge" href="/guides/plans-and-limits">
+    Compare monthly allowances and model access tiers.
+  </Card>
+  <Card title="Troubleshooting" icon="life-ring" href="/guides/troubleshooting">
+    Diagnose model, allowance, provider, and attachment failures.
+  </Card>
+</CardGroup>

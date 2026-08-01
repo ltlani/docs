@@ -29,6 +29,19 @@ outputs, and search-enabled workflows typically consume more.
 - Reserve larger token limits for long-form answers.
 - Use deterministic settings for troubleshooting to reduce retries.
 
+## Expiring promotional credits
+
+Some temporary campaigns grant credits with their own expiry. While active,
+those promotional credits are spent before an equivalent amount of regular
+balance and are tracked separately so a failed request can refund the correct
+bucket. Unused promotional credit is removed at the campaign expiry shown in
+the dashboard.
+
+The current Discord token-rotation campaign, when offered, grants `0.17`
+temporary credits and two days of effective Plus access for a verified token
+reset on the same Discord application. It can be claimed once and is not an
+ongoing monthly allowance.
+
 ## Common billing questions
 
 <AccordionGroup>

@@ -1,0 +1,92 @@
+---
+title: "Telegram module"
+description: "Connect a BotFather bot token for Telegram DMs, groups, commands, media, and streamed replies."
+---
+
+## What the Telegram module supports
+
+Telegram verbs support:
+
+- Direct messages and group chats
+- Text and photo understanding
+- Image generation
+- Web search, memory, and social auto-state
+- Edit-in-place response streaming
+- Slash commands registered with Telegram
+
+## Before you connect
+
+Create a bot with Telegram's `@BotFather` and copy its bot token. Treat that
+token like a password: anyone holding it can control the Telegram bot.
+
+## Connect the bot
+
+<Steps>
+  <Step title="Open the Telegram module">
+    Open your verb, select **Modules**, then choose **Telegram**.
+  </Step>
+  <Step title="Paste the BotFather token">
+    Verba validates the token with Telegram before saving it. A token already
+    connected to another verb cannot be connected twice.
+  </Step>
+  <Step title="Finish connection">
+    Verba encrypts the saved token, configures a secret webhook, and registers
+    the supported commands.
+  </Step>
+  <Step title="Add the bot to a group or open its DM">
+    DMs are ready immediately. In groups, mention or reply to the bot, or use
+    `/activate_channel` to let it answer without a mention.
+  </Step>
+</Steps>
+
+## Commands
+
+| Command | What it does | Permission notes |
+| --- | --- | --- |
+| `/help` | Shows available Telegram commands | Everyone |
+| `/ping` | Checks whether the bot is responding | Everyone |
+| `/dashboard` | Opens the Verba dashboard | Everyone |
+| `/generate <prompt>` | Generates an image when image generation is enabled | Everyone |
+| `/reset` | Clears conversation history | Group admins in groups; available in DMs |
+| `/activate_channel` | Enables replies without mentions in the current group | Group admins |
+| `/remove_channel` | Returns the group to mention/reply routing | Group admins |
+
+## Reply routing
+
+- In DMs, every incoming user message addresses the verb.
+- In groups, the verb answers when it is mentioned, when somebody replies to
+  it, or when the group has been activated.
+- Messages are queued per chat and duplicate webhook updates are ignored.
+- Very long responses are split into Telegram-safe chunks.
+
+## Media and streaming
+
+Photo messages can be passed to a vision-capable model. Image generation uses
+the model selected in the Image Engine. If Response Streaming is enabled,
+Telegram receives an early partial reply that is edited into the final answer.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="The token is rejected">
+    Copy a fresh token from `@BotFather`, remove spaces, and confirm it belongs
+    to the intended bot. Revoke it in BotFather if it may have been exposed.
+  </Accordion>
+  <Accordion title="The bot works in DMs but not in a group">
+    Mention it or reply to one of its messages. A group admin can also run
+    `/activate_channel`. Check Telegram group permissions if commands fail.
+  </Accordion>
+  <Accordion title="A photo was not understood">
+    Select a vision-capable text model and retry with one clear image plus a
+    specific question.
+  </Accordion>
+</AccordionGroup>
+
+<CardGroup cols={2}>
+  <Card title="Response streaming" icon="bolt" href="/guides/response-streaming">
+    Learn how partial replies are edited in place.
+  </Card>
+  <Card title="Image generation" icon="image" href="/guides/image-generation">
+    Choose models, prompts, and aspect ratios.
+  </Card>
+</CardGroup>
