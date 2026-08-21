@@ -7,8 +7,9 @@ description: "High-frequency questions across API, Discord, memory, billing, and
 
 - How does the API work: create API key -> call `POST /v1/response` with `character` + `messages` -> reuse `session_id`.
 - Where to set system instructions: Dashboard -> Bot -> AI Engine -> Behavior (`systemInstructions`, max `8000` chars).
-- Plan limits: Free `50/4096`, Plus `75/8192`, Pro `100/16384`, Ultra `150/32768` (context/max tokens).
-- Full tier matrix (`verbs/msg-min/context/max-tokens`): Free `5/20/50/4096`, Plus `10/40/75/8192`, Pro `20/100/100/16384`, Ultra `40/unlimited/150/32768`.
+- Plan limits: Free `50/4096`, Plus `75/8192`, Pro `100/16384`, Ultra `unlimited/32768` (short-term memory/max tokens).
+- Messages per minute are unlimited on every plan. Verbs by plan: Free `5`,
+  Plus `10`, Pro `20`, Ultra `40`.
 
 ## Product basics
 
@@ -51,7 +52,8 @@ description: "High-frequency questions across API, Discord, memory, billing, and
   <Accordion title="Why did the bot send text instead of making a poll?">
     The bot can only create native Discord polls in channels where it has poll
     permission. If polls are disabled or the channel blocks them, it falls back
-    to a normal text reply.
+    to a normal text reply. It also reserves polls for a direct request or a
+    strong group-choice moment, with cooldown and duplicate protection.
   </Accordion>
   <Accordion title="Do I need /vc-join every time?">
     No. Ultra bots can also join voice chat from a clear normal message asking
@@ -84,15 +86,22 @@ description: "High-frequency questions across API, Discord, memory, billing, and
     Mention it, reply to one of its messages, or have a group admin run
     `/activate_channel`.
   </Accordion>
+  <Accordion title="Which WhatsApp commands are available?">
+    `/help`, `/ping`, `/generate &lt;prompt&gt;`, `/status`, `/switch`, and
+    `/disconnect`.
+  </Accordion>
+  <Accordion title="Does Telegram support expression controls?">
+    Yes. You can independently control reactions, relevant GIF follow-ups,
+    stickers, custom emoji, native polls, and multi-message replies.
+  </Accordion>
 </AccordionGroup>
 
 ## Streaming and social-state FAQ
 
 <AccordionGroup>
   <Accordion title="Is platform response streaming Ultra-only?">
-    No. The AI Engine toggle controls edit-in-place replies on Discord,
-    WhatsApp, and Telegram. Ultra-only streaming refers to public API SSE with
-    `stream: true`.
+    Yes. Edit-in-place replies on Discord, WhatsApp, and Telegram require Ultra.
+    Public API SSE with `stream: true` is a separate Ultra feature.
   </Accordion>
   <Accordion title="Does social state rewrite personality or memory?">
     No. It is a temporary mood layer. Auto mode can consider important memories,
@@ -159,7 +168,12 @@ description: "High-frequency questions across API, Discord, memory, billing, and
     Free: 5, Plus: 10, Pro: 20, Ultra: 40.
   </Accordion>
   <Accordion title="Do plans affect context and token limits?">
-    Yes. Plan tier sets max model context and max response tokens.
+    Yes. Plan tier sets short-term memory and max response tokens. Ultra has
+    unlimited short-term memory and a `32768` max-token limit.
+  </Accordion>
+  <Accordion title="Are messages per minute limited by plan?">
+    No. Plan-level messages per minute are unlimited on Free, Plus, Pro, and
+    Ultra. Endpoint-specific safety limits can still apply to sensitive actions.
   </Accordion>
   <Accordion title="Where can I see the full plan matrix?">
     See the Plans and limits guide for complete tier-by-tier details.

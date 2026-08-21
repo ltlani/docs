@@ -28,7 +28,10 @@ Use it when you need exact ranges, limits, and behavior implications.
 | Free | 50 | 4096 |
 | Plus | 75 | 8192 |
 | Pro | 100 | 16384 |
-| Ultra | 150 | 32768 |
+| Ultra | Unlimited | 32768 |
+
+Plan-level messages per minute are unlimited for all four tiers. Response
+Streaming is available on Ultra.
 
 ## Behavior settings
 
@@ -149,6 +152,9 @@ Discord Expression Controls:
 - `discordPollsEnabled`
 - `multiMessageEnabled` (also used by non-Discord split replies)
 
+GIFs and stickers are relevance-checked. Polls are selected for explicit
+requests or strong group-choice moments and use cooldown and duplicate guards.
+
 Current defaults:
 
 - Emoji reactions: on
@@ -174,7 +180,8 @@ Conversation scope notes:
 - The shared Verba number uses a secure authorization link to choose a verb.
 - Text, images, voice, reply context, image generation, memory, and platform
   response streaming are supported.
-- `/help`, `/status`, `/switch`, and `/disconnect` manage a conversation.
+- `/help`, `/ping`, `/generate`, `/status`, `/switch`, and `/disconnect` are
+  supported.
 
 ## Telegram module settings
 
@@ -184,6 +191,8 @@ Conversation scope notes:
   `/ping`, and `/help` are registered.
 - Photos/vision, memory, web search, social state, image generation, and
   edit-in-place response streaming are supported.
+- Telegram Expression Controls cover emoji reactions, relevant GIF follow-ups,
+  stickers, custom emoji, native polls, and multi-message replies.
 
 ## Custom messages settings
 

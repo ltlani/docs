@@ -5,10 +5,10 @@ description: "Send the beginning of a reply early, then edit it in place as gene
 
 ## What the toggle does
 
-Turn on **Response Streaming** in **Dashboard -> Verb -> AI Engine**. On
-Discord, WhatsApp, and Telegram, Verba sends the first useful part of a reply
-as soon as it is available, then edits that same message until the final text
-is complete.
+On Ultra, turn on **Response Streaming** in **Dashboard -> Verb -> AI Engine**.
+On Discord, WhatsApp, and Telegram, Verba sends the first useful part of a
+reply as soon as it is available, then edits that same message until the final
+text is complete.
 
 This makes long replies feel faster without leaving duplicate partial messages
 behind. The completed model response remains the authoritative final message.
@@ -31,7 +31,7 @@ These are two different features:
 - `POST /v1/response` with `stream: true` uses Server-Sent Events (SSE) and is
   currently an Ultra API feature.
 
-Enabling the platform toggle does not enable API SSE on a lower plan.
+Both currently require Ultra, but enabling one does not enable the other.
 
 ## Reliability behavior
 

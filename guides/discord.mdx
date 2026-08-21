@@ -112,6 +112,11 @@ All of these are enabled by default for new bots. Emoji, GIF, sticker, custom
 emoji, and poll controls are Discord-specific. Multi-message behavior is a
 shared response setting and can also affect supported non-Discord surfaces.
 
+GIF and sticker follow-ups are relevance-checked before sending. Polls are
+reserved for direct requests or a strong, active group-choice moment. Poll
+discussion, capability questions, and ordinary one-line messages do not create
+a poll, and cooldown plus duplicate checks prevent repeated polls.
+
 ## Mention mode vs AI-channel mode
 
 ### Mention mode
@@ -192,10 +197,11 @@ instead of sounding detached from the channel.
 
 ## Response streaming
 
-Turn on **Response Streaming** in the AI Engine to send a useful partial reply
-early and edit the same Discord message until the answer is complete. This is
-independent of multi-message mode: streaming updates one in-progress message,
-while multi-message mode intentionally creates separate final messages.
+On Ultra, turn on **Response Streaming** in the AI Engine to send a useful
+partial reply early and edit the same Discord message until the answer is
+complete. This is independent of multi-message mode: streaming updates one
+in-progress message, while multi-message mode intentionally creates separate
+final messages.
 
 ## Permissions behavior
 
@@ -275,7 +281,9 @@ token that may have been exposed.
   <Accordion title="Bot won't create a poll">
     Poll Creation must be enabled in Discord Expression Controls, and the bot
     also needs Discord's native poll permission in that channel. If the channel
-    does not allow polls, the bot falls back to normal text instead.
+    does not allow polls, the bot falls back to normal text instead. Polls are
+    only selected for a clear request or a strong group-choice moment, not every
+    mention of the word "poll."
   </Accordion>
   <Accordion title="Bot keeps using plain emoji instead of server emoji">
     Turn on Custom Emojis in Discord Expression Controls and make sure the bot

@@ -1,33 +1,34 @@
 ---
 title: "Plans quick reference"
-description: "One-line tier matrix for verbs, message rate, context, and max tokens."
+description: "Current prices and limits for verbs, messages, memory, tokens, and images."
 ---
 
 ## One-line matrix
 
-Format: `verbs/msg-min/context/max-tokens`
+Format: `verbs/short-term-memory/max-tokens`
 
-- Free: `5/20/50/4096`
-- Plus: `10/40/75/8192`
-- Pro: `20/100/100/16384`
-- Ultra: `40/unlimited/150/32768`
+- Free: `5/50/4096`
+- Plus: `10/75/8192`
+- Pro: `20/100/16384`
+- Ultra: `40/unlimited/32768`
 
 ## Expanded matrix
 
-| Plan | Verbs | Message rate | Context | Max tokens | Image generations |
-| --- | --- | --- | --- | --- | --- |
-| Free | `5` | `20 msg/min` | `50` | `4096` | `20/mo` |
-| Plus | `10` | `40 msg/min` | `75` | `8192` | `50/mo` |
-| Pro | `20` | `100 msg/min` | `100` | `16384` | `100/mo` |
-| Ultra | `40` | `Unlimited` | `150` | `32768` | `Unlimited` |
+| Plan | Price | Verbs | Messages/min | Short-term memory | Max tokens | Image generations |
+| --- | --- | --- | --- | --- | --- | --- |
+| Free | `$0/mo` | `5` | Unlimited | `50` | `4096` | `20/mo` |
+| Plus | `$5.99/mo` | `10` | Unlimited | `75` | `8192` | `50/mo` |
+| Pro | `$10.99/mo` | `20` | Unlimited | `100` | `16384` | `100/mo` |
+| Ultra | `$20.99/mo` | `40` | Unlimited | Unlimited | `32768` | Unlimited |
 
 ## Notes
 
 - `stream: true` in the public API is Ultra-only.
-- The per-verb Response Streaming toggle for Discord, WhatsApp, and Telegram is
-  separate from public API SSE.
+- The per-verb Response Streaming toggle is separate from public API SSE and is
+  also currently Ultra-only.
 - API access is available on Pro and Ultra.
 - Voice calling is available on Ultra.
+- Monthly included credits are Free `0`, Plus `2.5`, Pro `5`, and Ultra `10`.
 
 ## Related
 

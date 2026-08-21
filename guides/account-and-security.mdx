@@ -103,15 +103,20 @@ Disconnect may be blocked while an active Patreon subscription is still attached
 
 ## Abuse protection and temporary IP bans
 
-Verba uses both edge-level and backend abuse protection to prevent request
-bursts, scraping loops, and automated flooding.
+Verba uses Cloudflare edge protection plus smaller endpoint-specific backend
+limits to prevent request bursts, scraping loops, and automated flooding.
 
 If an IP repeatedly trips those protections, Verba can place it into a temporary
 ban ladder:
 
-- First backend abuse hit: about `30 minutes`
-- Repeated edge escalation: about `24 hours`
-- Repeated repeat offender promotion: up to `30 days`
+- Three Cloudflare block events within `24 hours` can promote an address to a
+  `24-hour` temporary ban.
+- A later repeat-offender promotion can extend that ban to `30 days`.
+
+Active bans are stored by Verba and synchronized with Cloudflare. Blocked
+requests receive an HTTP `403` response while the ban is active. Sensitive
+endpoints such as magic-link requests keep their own smaller limits even when
+an address is not banned.
 
 If you hit a temporary ban unexpectedly during normal use, stop rapid retries,
 wait for the window to expire, and contact support with:

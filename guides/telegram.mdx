@@ -11,7 +11,9 @@ Telegram verbs support:
 - Text and photo understanding
 - Image generation
 - Web search, memory, and social auto-state
-- Edit-in-place response streaming
+- Emoji reactions, relevant GIFs, stickers, custom emoji, and native polls
+- Multi-message replies
+- Edit-in-place response streaming on Ultra
 - Slash commands registered with Telegram
 
 ## Before you connect
@@ -62,8 +64,26 @@ token like a password: anyone holding it can control the Telegram bot.
 ## Media and streaming
 
 Photo messages can be passed to a vision-capable model. Image generation uses
-the model selected in the Image Engine. If Response Streaming is enabled,
-Telegram receives an early partial reply that is edited into the final answer.
+the model selected in the Image Engine. On Ultra, enabling Response Streaming
+lets Telegram receive an early partial reply that is edited into the final
+answer.
+
+## Telegram Expression Controls
+
+The Telegram module includes controls for:
+
+- Emoji Reactions
+- GIF Follow-ups
+- Stickers
+- Custom Emojis
+- Poll Creation
+- Multi-Message Replies
+
+These controls are enabled by default for newly connected bots and can be
+disabled individually. GIFs and stickers are checked for conversational
+relevance before they are sent. Polls are created for direct requests or a
+strong group-choice moment, with duplicate and cooldown protection so ordinary
+conversation does not turn into poll spam.
 
 ## Troubleshooting
 
@@ -79,6 +99,11 @@ Telegram receives an early partial reply that is edited into the final answer.
   <Accordion title="A photo was not understood">
     Select a vision-capable text model and retry with one clear image plus a
     specific question.
+  </Accordion>
+  <Accordion title="The bot did not create a poll">
+    Make sure Poll Creation is enabled. The bot creates a native poll when you
+    ask clearly or when a real group decision fits the conversation; merely
+    mentioning polls or discussing the feature does not force one.
   </Accordion>
 </AccordionGroup>
 

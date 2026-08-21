@@ -17,10 +17,12 @@ answers.
 - System instructions: set in Dashboard -> Bot -> AI Engine -> Behavior (`systemInstructions`, max `8000` chars).
 - `/v1/response` auth: `Authorization: Bearer vka_...` or `x-api-key: vka_...`.
 - Session memory: reuse `session_id` for follow-up calls.
-- Plan limits (context/tokens): Free `50/4096`, Plus `75/8192`, Pro `100/16384`, Ultra `150/32768`.
-- Plan full matrix (`verbs/msg-min/context/max-tokens`): Free `5/20/50/4096`, Plus `10/40/75/8192`, Pro `20/100/100/16384`, Ultra `40/unlimited/150/32768`.
+- Plan limits (short-term memory/tokens): Free `50/4096`, Plus `75/8192`, Pro
+  `100/16384`, Ultra `unlimited/32768`.
+- Plan-level messages per minute are unlimited on every tier. Verb limits are
+  Free `5`, Plus `10`, Pro `20`, and Ultra `40`.
 - Platform streaming: AI Engine toggle for Discord, WhatsApp, and Telegram;
-  separate from Ultra-only API SSE.
+  available on Ultra and separate from Ultra API SSE.
 - Telegram: connect a BotFather token; DMs always address the verb, while groups
   use mention/reply routing or `/activate_channel`.
 
@@ -80,11 +82,15 @@ answers.
 ## Plans and limits questions
 
 <AccordionGroup>
-  <Accordion title="What are Free/Plus/Pro/Ultra limits for context, max tokens, verbs, and message rate?">
-    Free `5/20/50/4096`, Plus `10/40/75/8192`, Pro `20/100/100/16384`, Ultra `40/unlimited/150/32768` (format: verbs/msg-min/context/max-tokens).
+  <Accordion title="What are Free/Plus/Pro/Ultra limits for memory, max tokens, verbs, and message rate?">
+    Short-term memory/max tokens/verbs are Free `50/4096/5`, Plus
+    `75/8192/10`, Pro `100/16384/20`, and Ultra
+    `unlimited/32768/40`. Plan-level messages per minute are unlimited on all
+    four tiers.
   </Accordion>
   <Accordion title="What are max model context and max response tokens by plan?">
-    Free: `50` context, `4096` max tokens. Plus: `75`, `8192`. Pro: `100`, `16384`. Ultra: `150`, `32768`.
+    Free: `50` short-term memory, `4096` max tokens. Plus: `75`, `8192`.
+    Pro: `100`, `16384`. Ultra: unlimited, `32768`.
   </Accordion>
   <Accordion title="Which plans support streaming on /v1/response?">
     Ultra supports `stream: true`. Free, Plus, and Pro do not.
@@ -107,7 +113,8 @@ answers.
     Use `/remove-channel`.
   </Accordion>
   <Accordion title="Can the bot reply to other bots?">
-    Default behavior ignores bot-authored messages.
+    Most unrelated bot messages are ignored. An already-active bot-to-bot or
+    autonomous exchange can continue in the same channel.
   </Accordion>
   <Accordion title="Why does /reset fail for regular members in a server?">
     Server reset requires elevated permissions.
@@ -157,9 +164,19 @@ answers.
     `/help`, `/ping`, `/dashboard`, `/generate`, `/reset`,
     `/activate_channel`, and `/remove_channel`.
   </Accordion>
+  <Accordion title="What WhatsApp commands are available?">
+    `/help`, `/ping`, `/generate &lt;prompt&gt;`, `/status`, `/switch`, and
+    `/disconnect`.
+  </Accordion>
+  <Accordion title="What can Telegram Expression Controls enable or disable?">
+    Emoji reactions, relevant GIF follow-ups, stickers, custom emoji, native
+    polls, and multi-message replies can each be controlled from the Telegram
+    module.
+  </Accordion>
   <Accordion title="Does platform response streaming require Ultra?">
-    No. The AI Engine toggle edits a Discord, WhatsApp, or Telegram message in
-    place. Only public API SSE with `stream: true` is Ultra-only.
+    Yes. The AI Engine toggle edits a Discord, WhatsApp, or Telegram message in
+    place on Ultra. Public API SSE with `stream: true` is separate and also
+    Ultra-only.
   </Accordion>
 </AccordionGroup>
 

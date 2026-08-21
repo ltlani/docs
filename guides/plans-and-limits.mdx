@@ -6,13 +6,12 @@ description: "Complete plan matrix for premium features, usage limits, and API b
 ## Premium quick answers
 
 - API access is available on Pro and Ultra plans (`/v1/response`, `/v1/image`).
-- Full matrix (`verbs/msg-min/context/max-tokens`): Free `5/20/50/4096`, Plus `10/40/75/8192`, Pro `20/100/100/16384`, Ultra `40/unlimited/150/32768`.
-- Free: `5` verbs, `20` msg/min, `50` context, `4096` max tokens.
-- Plus: `10` verbs, `40` msg/min, `75` context, `8192` max tokens.
-- Pro: `20` verbs, `100` msg/min, `100` context, `16384` max tokens.
-- Ultra: `40` verbs, unlimited msg/min, `150` context, `32768` max tokens.
-- Public API SSE (`stream: true`) is available on Ultra. The AI Engine's
-  Discord/WhatsApp/Telegram response-streaming toggle is a separate feature.
+- Monthly prices: Free `$0`, Plus `$5.99`, Pro `$10.99`, Ultra `$20.99`.
+- Messages per minute are unlimited on every plan.
+- Full matrix (`verbs/short-term-memory/max-tokens`): Free `5/50/4096`, Plus
+  `10/75/8192`, Pro `20/100/16384`, Ultra `40/unlimited/32768`.
+- Public API SSE (`stream: true`) and the separate AI Engine platform-streaming
+  toggle are currently available on Ultra.
 - Image generation monthly allowance: Free `20`, Plus `50`, Pro `100`, Ultra unlimited.
 - AI/Image/Voice engine model pickers show dynamic upgrade prompts when premium
   models are outside your current plan.
@@ -32,20 +31,21 @@ Quick reference (context/tokens):
 - Free: `50` / `4096`
 - Plus: `75` / `8192`
 - Pro: `100` / `16384`
-- Ultra: `150` / `32768`
+- Ultra: Unlimited / `32768`
 
 ## Feature matrix
 
 | Feature | Free | Plus | Pro | Ultra |
 | --- | --- | --- | --- | --- |
+| Monthly price | `$0` | `$5.99` | `$10.99` | `$20.99` |
 | Monthly credit allowance | `0` | `2.5` | `5` | `10` |
 | Max verbs | `5` | `10` | `20` | `40` |
-| Message rate limit (per minute) | `20` | `40` | `100` | `Unlimited` |
-| Max model context | `50` | `75` | `100` | `150` |
+| Messages per minute | Unlimited | Unlimited | Unlimited | Unlimited |
+| Short-term memory (model context) | `50` | `75` | `100` | Unlimited |
 | Max response tokens | `4096` | `8192` | `16384` | `32768` |
 | API access (`/v1/response`, `/v1/image`) | No | No | Yes | Yes |
 | API streaming (`/v1/response` with `stream: true`) | No | No | No | Yes |
-| Platform edit-in-place streaming | Yes | Yes | Yes | Yes |
+| Platform edit-in-place streaming | No | No | No | Yes |
 | Default model tier access | Free | Free + Plus | Free + Plus + Pro | Free + Plus + Pro + Ultra |
 | Premium model pickers in AI/Image/Voice engines | Limited | Expanded | Expanded more | Full catalog access |
 | Watermark removal | No | Yes | Yes | Yes |
@@ -63,20 +63,23 @@ Quick reference (context/tokens):
 ## What each limit changes
 
 - `Max verbs`: how many verbs you can create on your account.
-- `Message rate limit`: per-user server-side throttle window.
-- `Max model context`: max recent-message window your verb can use.
+- `Messages per minute`: plan-level conversation throughput is unlimited. Smaller
+  endpoint-specific safety limits can still protect sensitive actions.
+- `Short-term memory`: max recent-message window your verb can use.
 - `Max response tokens`: cap for generated response length.
 - `Monthly credit allowance`: recurring included credit amount tied to tier.
 
 ## Behavior when you exceed limits
 
 - Verb creation over your tier cap is rejected.
-- Model context above your cap is clamped or rejected depending on endpoint.
+- Short-term memory above your plan cap is clamped or rejected depending on endpoint.
 - Public API requests from Free or Plus accounts return a plan-upgrade error.
 - Streaming requests from non-Ultra accounts return a plan-upgrade error.
-- Platform response streaming does not use the public API SSE entitlement.
+- Platform response streaming and public API SSE are separate paths, but both
+  currently require Ultra.
 - Image generation stops when the account reaches its monthly allowance.
-- Message bursts above tier limits return rate-limit responses.
+- Endpoint-specific abuse controls can still return rate-limit responses even
+  though every plan has unlimited messages per minute.
 
 ## Model access and tiering
 

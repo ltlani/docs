@@ -60,7 +60,7 @@ Current default limits:
 | Free | `50` | `4096` |
 | Plus | `75` | `8192` |
 | Pro | `100` | `16384` |
-| Ultra | `150` | `32768` |
+| Ultra | Unlimited | `32768` |
 
 <Note>
   If you request settings above your tier limits, they are clamped or rejected
@@ -80,6 +80,10 @@ That upgrade hint is dynamic, so the exact count can differ depending on:
 - Your current plan
 - The active model catalog
 - Whether new premium models have been added since your last visit
+
+<Card title="Valley 3" icon="sparkles" href="/guides/valley-3">
+  Learn about Verba's free roleplay, storytelling, and vision model.
+</Card>
 
 ## Recommended presets
 
@@ -109,9 +113,9 @@ Use this for natural chat pacing; disable if you want one compact answer.
 
 ## Response streaming
 
-When enabled, Discord, WhatsApp, and Telegram can show the beginning of a
-response early and edit that message into the complete answer. This is separate
-from Ultra-only API SSE streaming.
+On Ultra, Discord, WhatsApp, and Telegram can show the beginning of a response
+early and edit that message into the complete answer. This is separate from the
+public API SSE path, which is also Ultra-only.
 
 Use it for better perceived speed on long answers. Turn it off when your style
 depends on several intentionally separate messages.

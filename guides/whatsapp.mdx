@@ -18,7 +18,7 @@ It supports:
 - Image generation
 - Voice messages
 - Reply context from WhatsApp replies
-- Edit-in-place response streaming
+- Edit-in-place response streaming on Ultra
 - Switching or disconnecting the connected verb
 
 ## Before you start
@@ -95,16 +95,18 @@ image above" refers to.
 
 ### Response streaming
 
-When Response Streaming is enabled in the verb's AI Engine, WhatsApp can receive
-the first useful part of the reply early and then see that message updated as
-generation continues. If streaming is unavailable before any partial text is
-sent, Verba falls back to a normal complete reply.
+On Ultra, enabling Response Streaming in the verb's AI Engine lets WhatsApp
+receive the first useful part of the reply early and then see that message
+updated as generation continues. If streaming is unavailable before any
+partial text is sent, Verba falls back to a normal complete reply.
 
 ## WhatsApp commands
 
 | Command | What it does |
 | --- | --- |
 | `/help` | Shows the available WhatsApp commands. |
+| `/ping` | Checks whether the WhatsApp connection is responding. |
+| `/generate <prompt>` | Generates an image when image generation is enabled. |
 | `/status` | Shows the currently connected verb. |
 | `/switch` | Opens the verb picker again so you can connect another verb. |
 | `/disconnect` | Disconnects the current chat from the selected verb. |
