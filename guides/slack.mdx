@@ -1,0 +1,149 @@
+---
+title: "Connect Verba to Slack"
+description: "Give one Verb its own Slack identity and choose where it can talk, react, and help."
+---
+
+## What Slack adds
+
+Once connected, your Verb can:
+
+- Reply to direct messages, mentions, channels, and threads
+- Remember conversations using the same personality and memory as the rest of Verba
+- Upload generated images, audio, files, and relevant GIFs
+- React with emojis and use workspace emojis it actually knows
+- Create interactive polls
+- Schedule messages and use selected workspace tools when you allow them
+
+## Each Verb gets its own Slack bot
+
+Slack uses one app per Verb. This means two Verbs in the same workspace can have
+different names, profile pictures, personalities, and permissions.
+
+You create the app in Slack, then connect it to Verba. Verba never asks for your
+Slack password or asks you to paste a bot token.
+
+## Connect a Verb
+
+<Steps>
+  <Step title="Create a Slack app">
+    Open [Your Apps in Slack](https://api.slack.com/apps?new_app=1), choose
+    **Create New App**, then choose **From scratch**. Select the workspace where
+    you want to use this Verb.
+  </Step>
+  <Step title="Copy the three values into Verba">
+    In Slack's **Basic Information** page, copy the **Client ID**, **Client
+    Secret**, and **Signing Secret** into the Verb's Slack page in Verba. Keep
+    the two secret values private.
+  </Step>
+  <Step title="Copy the Verba setup into Slack">
+    In Verba, select **Copy configured Slack manifest**. In your Slack app,
+    open **App Manifest**, paste the setup, review it, and save it.
+  </Step>
+  <Step title="Choose the app's appearance">
+    Set the Slack app's display name and upload the Verb's profile picture in
+    Slack. Slack does not accept the picture directly inside the copied setup.
+  </Step>
+  <Step title="Connect and authorize">
+    Return to Verba and select **Connect with Slack**. Approve the permissions
+    in Slack. The app will then appear as its own bot in the workspace.
+  </Step>
+  <Step title="Choose where it can speak freely">
+    Mentions and direct messages work after installation. Select the channels
+    where the Verb may answer without being mentioned.
+  </Step>
+</Steps>
+
+## Where the Verb replies
+
+- A direct message talks to the Verb directly.
+- Mentioning the Verb can trigger it in a channel it can access.
+- **Active channels** are the only channels where it may join in on its own.
+- **Thread Replies** keeps answers inside the thread where the conversation began.
+- Verba does not automatically join every channel in your workspace.
+
+## Permissions
+
+Slack asks for additional permission only when you turn on a feature that needs
+it. The available groups are:
+
+| Permission group | What it allows |
+| --- | --- |
+| Conversation | Messages, mentions, direct messages, and threads |
+| Content | Images, files, audio, GIFs, reactions, and polls |
+| Moderation | Managing messages sent by the app |
+| Workspace | Channels, bookmarks, pins, and canvases where Slack allows it |
+
+A Slack bot normally cannot delete messages written by other people. Slack's
+own permissions always take priority.
+
+## Slack controls
+
+These controls change Slack-specific behavior. Image generation, voice replies,
+multi-message replies, and autonomous behavior are configured in the matching
+Verba engine pages.
+
+| Control | What it does |
+| --- | --- |
+| Emoji Reactions | Adds a fitting Slack reaction when one is useful |
+| GIF Follow-ups | Finds and uploads a relevant animated GIF |
+| Workspace Emojis | Uses an exact workspace emoji it knows about |
+| Interactive Polls | Posts a poll with buttons and live vote totals |
+| Thread Replies | Keeps replies in the original thread |
+| Scheduled Messages | Allows native Slack scheduled messages |
+
+## Slack commands
+
+Each command has its own toggle in the Slack module:
+
+| Command | What it does |
+| --- | --- |
+| `/activate-channel` | Allows autonomous replies in the current channel |
+| `/remove-channel` | Stops autonomous replies in the current channel |
+| `/reset` | Clears recent conversation context without deleting long-term memories |
+| `/generate <prompt>` | Generates an image when Image Engine is enabled |
+| `/dashboard` | Shares the Verb dashboard link |
+| `/ping` | Checks whether the Verb is online |
+
+There is no standalone voice command. When Voice Engine is enabled, a voice
+message may be added alongside a normal reply when the Verb decides it fits.
+
+## Images, GIFs, and voice messages
+
+- Generated images arrive as Slack file uploads.
+- GIFs arrive as Slack files when GIF Follow-ups is enabled.
+- Voice messages are sent as audio files alongside the normal text reply.
+- If you ask about the Verb's appearance, Verba can use its profile and banner
+  as visual references.
+
+Slack does not provide native voice calling for Verba.
+
+## Memory and personality
+
+Slack uses the Verb's personality, instructions, knowledge, training, model
+settings, social state, and memory. Recent context stays separated by Verb,
+channel, and thread. Auto Memory can save useful details when you enable it.
+
+## Important limitations
+
+- You must create and configure the Slack app yourself.
+- Adding a new permission group may ask you to approve Slack permissions again.
+- The Verb can only use channels and actions that Slack grants to its app.
+- Slack does not provide native voice calling for Verba.
+
+If setup fails, check that the three Slack values were copied correctly, the
+manifest was saved, and the app was installed in the intended workspace.
+
+<CardGroup cols={2}>
+  <Card title="Image generation" icon="image" href="/guides/image-generation">
+    Learn how Verba uses your Verb's visual identity.
+  </Card>
+  <Card title="Voice and audio" icon="microphone" href="/guides/voice-and-audio">
+    Configure optional voice messages.
+  </Card>
+  <Card title="Memory and knowledge" icon="database" href="/guides/memory-and-knowledge">
+    Keep the same character consistent everywhere.
+  </Card>
+  <Card title="Troubleshooting" icon="life-ring" href="/guides/troubleshooting">
+    Fix common connection and permission problems.
+  </Card>
+</CardGroup>

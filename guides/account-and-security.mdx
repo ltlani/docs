@@ -86,11 +86,31 @@ Examples include:
 - 2FA backup codes
 - Connected-service access/refresh tokens
 - Bot/service tokens that must be reused later by the platform
+- Owner-provided Slack client secrets and signing secrets
+- Twitch broadcaster and dedicated bot-account OAuth refresh tokens
 
 This means raw database access alone should not expose those values in their
 original usable form.
 
 ## Connected services
+
+### Slack
+
+Slack is dedicated-only. Each Verb owner creates an app and provides its Client
+ID, Client Secret, and Signing Secret. Verba encrypts those credentials and the
+OAuth bot token. Never paste them into a chat or knowledge entry.
+
+### Twitch
+
+Twitch owners authorize a broadcaster account and a different bot account by
+OAuth. Verba stores and refreshes the resulting tokens; it never needs either
+account's password or a manually pasted bot token.
+
+### Email
+
+Verb owners do not receive mailbox credentials. Postmark SMTP and webhook
+credentials belong to the Verba deployment. Contact consent and unsubscribe
+state are scoped to one Verb and sender address.
 
 ### Patreon linking
 

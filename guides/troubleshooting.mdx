@@ -111,6 +111,54 @@ description: "Fix common Verba issues fast with concrete checks and recovery ste
   </Accordion>
 </AccordionGroup>
 
+## Slack, Twitch, and Email issues
+
+<AccordionGroup>
+  <Accordion title="Slack will not let me connect the app">
+    Verify that all three credentials belong to the same Slack app, copy the
+    latest configured manifest into that app, save its changes, and confirm the
+    OAuth redirect exactly matches the URL in the manifest. Recopy the manifest
+    after changing credentials or reconnecting a different app.
+  </Accordion>
+  <Accordion title="Slack mentions work but ordinary channel messages do not">
+    Add that channel under **Active channels** in the Slack module. Verba does
+    not listen autonomously in every workspace channel by default.
+  </Accordion>
+  <Accordion title="A Slack expression or command says permission is missing">
+    Enable the matching capability bundle and complete the new Slack OAuth
+    approval. Also verify the command is enabled and the app can access the
+    current channel.
+  </Accordion>
+  <Accordion title="Twitch setup stops after authorizing my channel">
+    Finish the second OAuth screen with a different Twitch account. That account
+    is the visible chat bot; using the broadcaster account twice is rejected.
+  </Accordion>
+  <Accordion title="A Twitch poll, moderation, or stream action fails">
+    Check the capability bundle, broadcaster scopes, moderator/channel
+    eligibility, and whether the command is owner-only. Polls, predictions, and
+    ad controls can also depend on the broadcaster's Twitch status.
+  </Accordion>
+  <Accordion title="My Twitch image or audio appears as a link">
+    That is expected. Twitch chat has no general media-upload endpoint, so
+    Verba posts generated media as a public link.
+  </Accordion>
+  <Accordion title="Email says delivery is not configured">
+    The administrator must configure Postmark SMTP and enable the Email
+    integration. Receiving replies additionally requires inbound forwarding and
+    both authenticated Postmark webhook URLs.
+  </Accordion>
+  <Accordion title="A Verb email receives mail but does not reply">
+    Check whether the inbox is paused, the daily account quota is exhausted, the
+    sender previously unsubscribed or bounced, the vanity is reserved/unknown,
+    or Postmark cannot reach the inbound webhook.
+  </Accordion>
+  <Accordion title="An email attachment was ignored">
+    Inbound files enter model context only after the configured scanner approves
+    the type and contents. Without `ATTACHMENT_SCANNER_URL`, they are excluded
+    deliberately.
+  </Accordion>
+</AccordionGroup>
+
 ## Account and billing issues
 
 <AccordionGroup>
@@ -163,8 +211,8 @@ Contact support with:
 
 - Exact timestamp (with timezone)
 - Verb ID/vanity URL
-- Surface (`Discord`, `chat`, `API`)
-- Integration details (`WhatsApp` or `Telegram`) when applicable
+- Surface (`Discord`, `chat`, `API`, `Slack`, `Twitch`, or `Email`)
+- Integration details (`WhatsApp`, `Telegram`, or another provider) when applicable
 - Error text + screenshot
 - Repro steps from clean session
 

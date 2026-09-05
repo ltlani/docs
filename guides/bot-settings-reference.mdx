@@ -123,6 +123,17 @@ Voice cloning:
 
 - Up to `3` clones per verb
 
+Voice reply behavior:
+
+- Generated audio is optional and accompanies the normal AI reply.
+- `voiceResponseFrequency` controls how often eligible replies get an audio
+  sidecar.
+- A clear natural-language voice-message request can trigger the sidecar while
+  Voice Engine is enabled.
+- Slack and Twitch do not expose a standalone voice command.
+- Native live calling is currently available only through Discord voice
+  channels.
+
 ## Image engine settings
 
 - `imageGeneration` toggle controls whether image commands/flows are active.
@@ -150,10 +161,12 @@ Discord Expression Controls:
 - `discordStickerResponsesEnabled`
 - `discordCustomEmojisEnabled`
 - `discordPollsEnabled`
-- `multiMessageEnabled` (also used by non-Discord split replies)
 
 GIFs and stickers are relevance-checked. Polls are selected for explicit
 requests or strong group-choice moments and use cooldown and duplicate guards.
+
+`multiMessageEnabled` belongs to the AI Engine and can affect multiple
+supported surfaces; it is not a Discord Expression Control.
 
 Current defaults:
 
@@ -162,7 +175,6 @@ Current defaults:
 - Server stickers: on
 - Custom emojis: on
 - Poll creation: on
-- Multi-message replies: on
 
 Core profile defaults include:
 
@@ -192,7 +204,53 @@ Conversation scope notes:
 - Photos/vision, memory, web search, social state, image generation, and
   edit-in-place response streaming are supported.
 - Telegram Expression Controls cover emoji reactions, relevant GIF follow-ups,
-  stickers, custom emoji, native polls, and multi-message replies.
+  stickers, custom emoji, and native polls.
+
+## Slack module settings
+
+- Slack is dedicated-only: one owner-created Slack app is assigned to one Verb.
+- Setup requires the app's Client ID, Client Secret, and Signing Secret, then a
+  generated manifest and Slack OAuth authorization.
+- Mentions and DMs work after installation; autonomous replies are limited to
+  channels selected in **Active channels**.
+- Expression Controls cover emoji reactions, relevant GIF uploads, known
+  workspace emojis, interactive Block Kit polls, thread routing, and scheduled
+  messages.
+- Slash command toggles cover `/activate-channel`, `/remove-channel`, `/reset`,
+  `/generate`, `/dashboard`, and `/ping`.
+- Content and workspace capability bundles request additional Slack scopes when
+  enabled.
+- The old all-in-one selector command and a standalone Slack voice command are
+  not installed.
+
+## Twitch module settings
+
+- One OAuth flow first authorizes the broadcaster and then requires a different
+  Twitch account for the visible bot identity.
+- Expression Controls cover chat-native tone, exact native emotes, eligible
+  channel polls, live EventSub reactions, announcements, and shoutouts.
+- Chat command toggles cover `!reset`, `!generate`, `!poll`, `!announce`,
+  `!clip`, `!shield`, `!dashboard`, and `!ping`.
+- Twitch reserves slash commands; custom Verb commands therefore use `!`.
+- Moderation, stream, content, and engagement bundles expose only tools backed
+  by the current OAuth scopes.
+- Generated images and audio appear as public links because Twitch chat has no
+  general media-upload API. Twitch GIF uploads and native bot calling are not
+  exposed.
+
+## Email module settings
+
+- The module shows `{vanity}@verba.ink`; no owner OAuth or mailbox password is
+  required.
+- Owners can pause/resume the inbox and see account-wide daily usage.
+- Daily outbound limits are Free `10`, Plus `50`, Pro `100`, and Ultra `500` per
+  UTC day.
+- Natural-language image requests can add an inline generated image. Voice
+  Engine can add an audio attachment alongside the normal reply.
+- Postmark handles SMTP delivery and inbound webhooks. Threading, per-Verb
+  consent, unsubscribe, hard-bounce, and complaint suppression are enforced by
+  the backend.
+- Email does not expose expression or slash-command toggles.
 
 ## Custom messages settings
 

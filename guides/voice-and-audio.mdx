@@ -11,6 +11,28 @@ voice once the personality feels right.
 If you want voice on every eligible reply, set voice response frequency to
 `100`. Lower values make voice replies intermittent on purpose.
 
+Voice output is a **sidecar to the normal AI response**. Verba generates the
+in-character text reply first, then may send the same response as audio when
+Voice Engine is enabled and the configured frequency selects it. A clear
+natural-language request for a voice message can also trigger audio, but Voice
+Engine must still be enabled and the Verb must have a usable voice.
+
+Slack and Twitch do not install a standalone voice command. Voice is not
+handled as an isolated command response on those integrations.
+
+## Delivery by surface
+
+| Surface | Voice-reply delivery | Native calling |
+| --- | --- | --- |
+| Discord | Generated voice attachment alongside the text reply | Supported in Discord voice channels on Ultra |
+| WhatsApp | WhatsApp-compatible generated audio/voice response | Not supported |
+| Telegram | Telegram-compatible generated audio/voice response | Not supported for bots |
+| Slack | Native uploaded audio file alongside the text reply | Not supported |
+| Twitch | Playable audio link alongside the chat reply | Not supported |
+| Email | Audio attachment alongside the email reply | Not supported |
+
+Calling is unavailable on providers that do not expose native bot calling.
+
 ## Voice attachment visual
 
 The Voice Engine settings also include a **Voice Attachment Visual** section.
@@ -100,6 +122,17 @@ WhatsApp voice notes can be transcribed and passed to the selected verb. When
 voice replies are enabled, supported WhatsApp conversations can receive a voice
 response as well. This is different from Discord live voice-channel calling,
 which has its own Ultra plan requirement.
+
+Telegram can receive voice/audio media through its bot integration. Slack
+receives an uploaded audio file, Twitch receives a playable link because chat
+has no general audio upload API, and Email receives an attachment. These are
+message attachments, not calls.
+
+<Note>
+  Discord is currently the only integration with a native live-call path.
+  WhatsApp calling is intentionally not exposed, and Slack, Twitch, Telegram
+  bots, and Email have no Verba call action.
+</Note>
 
 ## Keep it natural
 

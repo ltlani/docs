@@ -1,0 +1,129 @@
+---
+title: "Use a Verb by email"
+description: "Give your Verb a private email address for natural, threaded conversations."
+---
+
+## Your Verb's email address
+
+Every eligible Verb can have an address based on its vanity:
+
+```text
+{vanity}@verba.ink
+```
+
+For example, `lunaveyne_8wa` becomes:
+
+```text
+lunaveyne_8wa@verba.ink
+```
+
+There is no mailbox password or OAuth connection to complete. The Email page
+shows the address, whether it is active, and your account's daily usage.
+
+## How it works
+
+1. Send an email to the Verb's address.
+2. The Verb reads the message and replies in the same conversation.
+3. Future replies stay connected to that email thread.
+
+The Verb uses its normal personality, knowledge, memory, and character settings.
+
+## Sender name and profile picture
+
+Replies use the Verb's name and address, for example:
+
+```text
+Luna Veyne <lunaveyne_8wa@verba.ink>
+```
+
+Email providers decide which sender picture appears in an inbox. Verba cannot
+force Gmail, Outlook, Apple Mail, or another provider to display a custom avatar
+for one message, but the message still uses the Verb's name and address.
+
+## Enable or pause email
+
+- Choose **Resume inbox** to let the Verb receive and answer mail.
+- Choose **Pause inbox** to stop the Verb from generating email replies.
+- Changing a Verb's vanity changes its active email address.
+- Reserved addresses such as `support@verba.ink` and `no-reply@verba.ink` are
+  not assigned to Verbs.
+
+## Consent and unsubscribe
+
+The first email you send opts you in only for that Verb. It does not give every
+Verb permission to email you.
+
+You can stop future messages at any time by:
+
+- Selecting the unsubscribe link in an email
+- Replying with `STOP`, `UNSUBSCRIBE`, or `REMOVE ME`
+- Marking the message as spam
+
+Hard bounces and spam complaints also stop future proactive messages. Normal
+incoming mail does not automatically re-enable someone who unsubscribed.
+
+## Daily limits
+
+The limit is shared across all email-enabled Verbs on your account and resets
+each UTC day.
+
+| Plan | Emails per day |
+| --- | ---: |
+| Free | `10` |
+| Plus | `50` |
+| Pro | `100` |
+| Ultra | `500` |
+
+Each delivered recipient uses one email. When the limit is reached, Verba keeps
+the incoming message but does not generate or send a reply.
+
+## Images and voice messages
+
+Email uses natural language instead of commands:
+
+- Ask the Verb to generate an image and it can attach the result inline below
+  the normal reply when Image Engine is enabled.
+- Ask for a voice message, or enable Voice Engine, and an audio attachment may
+  be sent alongside the normal text reply.
+- If you ask about the Verb's appearance, Verba can use its profile picture and
+  banner as visual references.
+
+There is no standalone voice command and email does not support native calling.
+
+## Attachments and safety
+
+- Generated email attachments are limited to 7 MB.
+- Unsafe executable attachments are rejected.
+- Incoming attachments are only shown to the AI after they pass the configured
+  safety checks.
+- Messages from automated systems are filtered to help prevent email loops.
+
+## Privacy and conversation context
+
+Email context is kept separate by sender, Verb, and thread. It is not shared
+with every person who contacts the Verb. When Auto Memory is enabled, useful
+details from eligible conversations can become long-term memories.
+
+## Important limitations
+
+- Email is not a full mailbox or webmail application.
+- Email does not support reactions, live typing, native polls, or native calls.
+- The receiving email provider controls the inbox sender picture.
+- Verba cannot automatically change DNS or mail-server settings for your domain.
+- Proactive emails can only be sent to contacts who have active consent for that
+  Verb.
+
+<CardGroup cols={2}>
+  <Card title="Plans and limits" icon="gauge" href="/guides/plans-and-limits">
+    Compare account limits, including daily email quotas.
+  </Card>
+  <Card title="Image generation" icon="image" href="/guides/image-generation">
+    Learn how generated images work.
+  </Card>
+  <Card title="Voice and audio" icon="microphone" href="/guides/voice-and-audio">
+    Configure optional audio attachments.
+  </Card>
+  <Card title="Memory and knowledge" icon="database" href="/guides/memory-and-knowledge">
+    Keep your character consistent everywhere.
+  </Card>
+</CardGroup>

@@ -7,7 +7,9 @@ description: "Choose an image model, use reference images, and generate the righ
 
 Open **Dashboard -> Verb -> Image Engine** and enable image generation. The
 selected model is used by app chat and supported platform commands such as
-Discord `/generate` and Telegram `/generate`.
+Discord `/generate`, Telegram `/generate`, Slack `/generate`, and Twitch
+`!generate`. WhatsApp and Email can invoke generation from a clear
+natural-language request.
 
 Verba's image generation catalog is Puter-backed. Users do not need to provide
 an Airforce account, an image-provider API key, or a separate provider login.
@@ -47,16 +49,40 @@ Ask for a named orientation such as `square`, `landscape`, `portrait`,
 Model providers may round or adapt a requested size to the nearest supported
 resolution while preserving the intended orientation.
 
-## Discord and Telegram commands
+## Commands and provider delivery
 
 Discord `/generate` accepts a required prompt, an optional aspect-ratio choice,
 and an optional reference attachment. Telegram accepts `/generate <prompt>` and
-uses the configured image model; conversational instructions can provide ratio
-context where supported.
+uses the configured image model. Slack `/generate <prompt>` creates a native
+Slack file upload. Twitch `!generate <prompt>` posts a public image link because
+Twitch chat has no general image-upload endpoint. Email embeds the generated
+image inline in the reply.
+
+| Surface | How the generated image is delivered |
+| --- | --- |
+| Discord | Native Discord attachment |
+| WhatsApp | WhatsApp image message |
+| Telegram | Native Telegram photo/media message |
+| Slack | Native Slack file upload |
+| Twitch | Public image link in chat |
+| Email | Inline image attachment below the text reply |
+
+Conversational instructions can provide ratio context where supported.
 
 Verba can use up to four reference images internally. Use one clear reference
 when likeness or composition matters; more references can make the instruction
 ambiguous.
+
+## Character appearance awareness
+
+When a prompt explicitly refers to the Verb's own appearance, Verba can add the
+Verb's current avatar and banner as visual references and include its visual
+profile context in the generation prompt. Ordinary image requests that do not
+refer to the character do not automatically force those references.
+
+GIF follow-ups are separate from AI image generation. Discord, Telegram, and
+Slack can use relevance-checked GIF expression controls. Twitch has no general
+GIF upload control, and Email does not turn normal replies into GIF searches.
 
 ## Prompt tips
 

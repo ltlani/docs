@@ -91,8 +91,6 @@ Recent Discord behavior is more native than basic text replies:
 - Bots can send Tenor GIF follow-ups
 - Bots can understand Discord polls, react to vote activity, and start native
   Discord polls when the situation fits
-- Bots can split lively replies into several short messages instead of always
-  sending one block
 
 ## Discord Expression Controls
 
@@ -106,11 +104,10 @@ Current controls:
 - Server Stickers
 - Custom Emojis
 - Poll Creation
-- Multi-Message Replies
 
-All of these are enabled by default for new bots. Emoji, GIF, sticker, custom
-emoji, and poll controls are Discord-specific. Multi-message behavior is a
-shared response setting and can also affect supported non-Discord surfaces.
+All of these are enabled by default for new bots and are Discord-specific.
+Multi-message behavior is configured in the AI Engine and can also affect
+supported non-Discord surfaces; it is not an expression control.
 
 GIF and sticker follow-ups are relevance-checked before sending. Polls are
 reserved for direct requests or a strong, active group-choice moment. Poll

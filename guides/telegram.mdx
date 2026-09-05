@@ -12,7 +12,7 @@ Telegram verbs support:
 - Image generation
 - Web search, memory, and social auto-state
 - Emoji reactions, relevant GIFs, stickers, custom emoji, and native polls
-- Multi-message replies
+- Multi-message replies configured through the AI Engine
 - Edit-in-place response streaming on Ultra
 - Slash commands registered with Telegram
 
@@ -77,13 +77,15 @@ The Telegram module includes controls for:
 - Stickers
 - Custom Emojis
 - Poll Creation
-- Multi-Message Replies
 
 These controls are enabled by default for newly connected bots and can be
 disabled individually. GIFs and stickers are checked for conversational
 relevance before they are sent. Polls are created for direct requests or a
 strong group-choice moment, with duplicate and cooldown protection so ordinary
 conversation does not turn into poll spam.
+
+Multi-message replies are configured in the AI Engine rather than Telegram
+Expression Controls.
 
 ## Troubleshooting
 

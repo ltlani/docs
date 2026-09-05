@@ -1,6 +1,6 @@
 ---
 title: "Plans quick reference"
-description: "Current prices and limits for verbs, messages, memory, tokens, and images."
+description: "Current prices and limits for verbs, messages, memory, tokens, images, and email."
 ---
 
 ## One-line matrix
@@ -14,12 +14,12 @@ Format: `verbs/short-term-memory/max-tokens`
 
 ## Expanded matrix
 
-| Plan | Price | Verbs | Messages/min | Short-term memory | Max tokens | Image generations |
-| --- | --- | --- | --- | --- | --- | --- |
-| Free | `$0/mo` | `5` | Unlimited | `50` | `4096` | `20/mo` |
-| Plus | `$5.99/mo` | `10` | Unlimited | `75` | `8192` | `50/mo` |
-| Pro | `$10.99/mo` | `20` | Unlimited | `100` | `16384` | `100/mo` |
-| Ultra | `$20.99/mo` | `40` | Unlimited | Unlimited | `32768` | Unlimited |
+| Plan | Price | Verbs | Messages/min | Short-term memory | Max tokens | Image generations | Emails/day |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Free | `$0/mo` | `5` | Unlimited | `50` | `4096` | `20/mo` | `10` |
+| Plus | `$5.99/mo` | `10` | Unlimited | `75` | `8192` | `50/mo` | `50` |
+| Pro | `$10.99/mo` | `20` | Unlimited | `100` | `16384` | `100/mo` | `100` |
+| Ultra | `$20.99/mo` | `40` | Unlimited | Unlimited | `32768` | Unlimited | `500` |
 
 ## Notes
 
@@ -27,8 +27,11 @@ Format: `verbs/short-term-memory/max-tokens`
 - The per-verb Response Streaming toggle is separate from public API SSE and is
   also currently Ultra-only.
 - API access is available on Pro and Ultra.
-- Voice calling is available on Ultra.
+- Native Discord voice-channel calling is available on Ultra. Calling remains
+  unavailable on integrations without native bot calling support.
 - Monthly included credits are Free `0`, Plus `2.5`, Pro `5`, and Ultra `10`.
+- Daily email limits are account-wide, count one unit per recipient delivery,
+  and reset at `00:00 UTC`.
 
 ## Related
 

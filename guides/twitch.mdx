@@ -1,0 +1,136 @@
+---
+title: "Connect Verba to Twitch"
+description: "Bring a Verb into your stream for chat, moderation, stream tools, and community reactions."
+---
+
+## What Twitch adds
+
+A connected Twitch Verb can:
+
+- Chat with viewers in your channel
+- React to follows, subscriptions, cheers, raids, and Channel Point events
+- Create polls and announcements when Twitch allows it
+- Help with moderation, including timeouts, bans, blocked terms, and AutoMod
+- Use supported stream tools such as clips, markers, shoutouts, and stream details
+- Keep the same personality, memory, knowledge, and visual identity it has elsewhere
+
+## Why Twitch asks for two accounts
+
+Twitch needs two separate authorizations:
+
+1. Your **broadcaster account** gives the Verb permission to work in your channel.
+2. A separate **bot account** is the name and profile picture viewers see in chat.
+
+The two accounts must be different. Verba never asks for either password and you
+do not need to paste a bot token.
+
+<Note>
+  Twitch controls the bot account's username, profile picture, and banner. Set
+  those on Twitch so the public bot identity matches the character you want.
+</Note>
+
+## Connect Twitch
+
+<Steps>
+  <Step title="Prepare the bot account">
+    Create or choose the Twitch account viewers should see as this Verb. Do not
+    use your broadcaster account for the bot step.
+  </Step>
+  <Step title="Start in Verba">
+    Open the Verb's Twitch page and select **Connect channel & bot with Twitch**.
+  </Step>
+  <Step title="Authorize your channel">
+    Sign in as the broadcaster and approve the requested permissions.
+  </Step>
+  <Step title="Authorize the bot">
+    Twitch opens a second authorization screen. Switch to the separate bot
+    account, check the account name carefully, and approve chat access.
+  </Step>
+  <Step title="Choose features">
+    Enable only the feature groups you want the Verb to use: conversation,
+    moderation, stream tools, content, or engagement.
+  </Step>
+</Steps>
+
+If the second authorization is interrupted, the Twitch page keeps the setup
+pending so you can continue with **Authorize bot account with Twitch**.
+
+## Twitch controls
+
+| Control | What it does |
+| --- | --- |
+| Chat-Native Tone | Keeps replies concise and natural for live chat |
+| Native Emotes | Uses Twitch emotes it actually knows |
+| Channel Polls | Creates a native poll when your channel is eligible |
+| Live Event Reactions | Responds to supported community events |
+| Highlighted Announcements | Sends a Twitch announcement |
+| Creator Shoutouts | Sends an official Twitch shoutout |
+
+Image generation, voice messages, multi-message replies, and autonomous behavior
+are configured in the matching Verba engine pages instead.
+
+## Twitch commands
+
+Twitch reserves slash commands for Twitch itself, so Verba's custom chat commands
+use `!`:
+
+| Command | What it does |
+| --- | --- |
+| `!reset` | Clears recent channel context without deleting long-term memories |
+| `!generate <prompt>` | Generates an image and posts its link when Image Engine is enabled |
+| `!poll Question \| Option one \| Option two` | Creates a native Twitch poll when available |
+| `!announce <message>` | Posts a highlighted announcement |
+| `!clip` | Creates a clip from the live stream |
+| `!shield on` / `!shield off` | Changes Shield Mode |
+| `!dashboard` | Shares the Verb dashboard link |
+| `!ping` | Checks whether the Verb is online |
+
+Every command has its own toggle on the Twitch page.
+
+There is no standalone voice command. When Voice Engine is enabled, a voice
+message may be added beside a normal reply when the Verb decides it fits.
+
+## Images, GIFs, and voice messages
+
+- Twitch chat receives generated images as links because Twitch does not support
+  general image uploads in chat.
+- Twitch does not support general GIF uploads. Native Twitch emotes are still
+  available when enabled.
+- Voice messages are shared as playable links alongside the normal text reply.
+- If a prompt refers to the Verb's appearance, Verba can use its profile picture
+  and banner as visual references.
+
+Twitch does not provide native voice calling for bots.
+
+## Memory and personality
+
+The Verb keeps its personality, instructions, knowledge, training, social state,
+and memory on Twitch. Recent context is kept for the connected channel and Verb.
+Auto Memory can save useful details when you enable it.
+
+## Important limitations
+
+- Custom Verba commands cannot use `/`; Twitch reserves slash commands.
+- Twitch chat does not have Slack-style threads or reactions.
+- Polls, predictions, moderation, and stream tools depend on Twitch permissions
+  and channel eligibility.
+- The bot must be a real, separately authorized Twitch account.
+- Twitch does not provide native bot calling or audio participation.
+
+If the connection fails, check that the broadcaster and bot accounts are
+different and that you completed both authorization screens.
+
+<CardGroup cols={2}>
+  <Card title="Image generation" icon="image" href="/guides/image-generation">
+    Learn how Verba uses visual references.
+  </Card>
+  <Card title="Voice and audio" icon="microphone" href="/guides/voice-and-audio">
+    Configure optional voice messages.
+  </Card>
+  <Card title="Memory and knowledge" icon="database" href="/guides/memory-and-knowledge">
+    Keep your character consistent everywhere.
+  </Card>
+  <Card title="Troubleshooting" icon="life-ring" href="/guides/troubleshooting">
+    Fix common Twitch connection problems.
+  </Card>
+</CardGroup>

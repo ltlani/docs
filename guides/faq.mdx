@@ -92,7 +92,43 @@ description: "High-frequency questions across API, Discord, memory, billing, and
   </Accordion>
   <Accordion title="Does Telegram support expression controls?">
     Yes. You can independently control reactions, relevant GIF follow-ups,
-    stickers, custom emoji, native polls, and multi-message replies.
+    stickers, custom emoji, and native polls. Multi-message replies are set in
+    the AI Engine.
+  </Accordion>
+</AccordionGroup>
+
+## Slack, Twitch, and Email FAQ
+
+<AccordionGroup>
+  <Accordion title="Why do I have to create a Slack app for each Verb?">
+    Slack cannot make one installed bot appear as unrelated identities on each
+    message. Verba therefore uses one dedicated owner-created Slack app per
+    Verb. Paste its three app credentials, apply Verba's generated manifest,
+    and finish with Slack OAuth.
+  </Accordion>
+  <Accordion title="Why does Twitch show two OAuth screens?">
+    The first grant belongs to the broadcaster channel. The second grant must
+    use a different Twitch account that becomes the visible bot username and
+    profile picture in chat. No password or pasted bot token is required.
+  </Accordion>
+  <Accordion title="Why do Twitch commands start with an exclamation mark?">
+    Twitch reserves slash commands for the platform. Verba's custom Twitch
+    commands therefore use names such as `!generate`, `!poll`, and `!ping`.
+  </Accordion>
+  <Accordion title="Can Slack and Twitch send voice replies?">
+    Yes, when Voice Engine is enabled, but there is no standalone voice
+    command. Audio accompanies the normal AI reply: Slack uploads an audio
+    file, while Twitch posts a playable link. Neither integration supports bot
+    calling.
+  </Accordion>
+  <Accordion title="How do I use a Verb email address?">
+    Enable the Email module and send mail to `{vanity}@verba.ink`. There is no
+    owner OAuth flow. The deployment administrator must configure Postmark SMTP,
+    inbound forwarding, and authenticated webhooks first.
+  </Accordion>
+  <Accordion title="What are the daily email limits?">
+    Free `10`, Plus `50`, Pro `100`, and Ultra `500` outbound deliveries per UTC
+    day. The quota is shared by all of the account owner's Email-enabled Verbs.
   </Accordion>
 </AccordionGroup>
 
@@ -174,6 +210,10 @@ description: "High-frequency questions across API, Discord, memory, billing, and
   <Accordion title="Are messages per minute limited by plan?">
     No. Plan-level messages per minute are unlimited on Free, Plus, Pro, and
     Ultra. Endpoint-specific safety limits can still apply to sensitive actions.
+  </Accordion>
+  <Accordion title="Does buying credits increase the daily email quota?">
+    No. Email delivery limits come from the account plan and reset daily at
+    `00:00 UTC`; they are separate from the credit balance.
   </Accordion>
   <Accordion title="Where can I see the full plan matrix?">
     See the Plans and limits guide for complete tier-by-tier details.

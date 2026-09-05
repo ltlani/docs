@@ -13,6 +13,8 @@ description: "Complete plan matrix for premium features, usage limits, and API b
 - Public API SSE (`stream: true`) and the separate AI Engine platform-streaming
   toggle are currently available on Ultra.
 - Image generation monthly allowance: Free `20`, Plus `50`, Pro `100`, Ultra unlimited.
+- Account-wide outbound Email allowance per UTC day: Free `10`, Plus `50`, Pro
+  `100`, Ultra `500`.
 - AI/Image/Voice engine model pickers show dynamic upgrade prompts when premium
   models are outside your current plan.
 - Discord `/vc-join` and `/vc-leave` are currently `Ultra` features.
@@ -51,9 +53,9 @@ Quick reference (context/tokens):
 | Watermark removal | No | Yes | Yes | Yes |
 | Advanced AI flag | No | No | Yes | Yes |
 | Discord `/vc-join` + `/vc-leave` | No | No | No | Yes |
-| Voice calling | No | No | No | Yes |
 | VIP support | No | No | No | Yes |
 | Image generations per month | `20` | `50` | `100` | Unlimited |
+| Outbound Verb emails per UTC day | `10` | `50` | `100` | `500` |
 
 <Note>
   These values are enforced by backend tier feature controls and can be updated
@@ -68,6 +70,8 @@ Quick reference (context/tokens):
 - `Short-term memory`: max recent-message window your verb can use.
 - `Max response tokens`: cap for generated response length.
 - `Monthly credit allowance`: recurring included credit amount tied to tier.
+- `Outbound Verb emails`: deliveries shared by all Email-enabled Verbs on the
+  account and reset at the start of each UTC day.
 
 ## Behavior when you exceed limits
 
@@ -78,6 +82,8 @@ Quick reference (context/tokens):
 - Platform response streaming and public API SSE are separate paths, but both
   currently require Ultra.
 - Image generation stops when the account reaches its monthly allowance.
+- Email replies stop before model generation when the account has no daily
+  email units remaining.
 - Endpoint-specific abuse controls can still return rate-limit responses even
   though every plan has unlimited messages per minute.
 

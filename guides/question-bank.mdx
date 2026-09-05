@@ -170,13 +170,51 @@ answers.
   </Accordion>
   <Accordion title="What can Telegram Expression Controls enable or disable?">
     Emoji reactions, relevant GIF follow-ups, stickers, custom emoji, native
-    polls, and multi-message replies can each be controlled from the Telegram
-    module.
+    polls can each be controlled from the Telegram module. Configure
+    multi-message replies in the AI Engine.
   </Accordion>
   <Accordion title="Does platform response streaming require Ultra?">
     Yes. The AI Engine toggle edits a Discord, WhatsApp, or Telegram message in
     place on Ultra. Public API SSE with `stream: true` is separate and also
     Ultra-only.
+  </Accordion>
+</AccordionGroup>
+
+## Slack, Twitch, and Email questions
+
+<AccordionGroup>
+  <Accordion title="What is the Slack dedicated-app flow?">
+    Create one Slack app for the Verb, paste its Client ID, Client Secret, and
+    Signing Secret into Verba, copy and apply the generated app manifest, then
+    authorize the app with Slack OAuth and choose active channels.
+  </Accordion>
+  <Accordion title="Which Slack commands are installed?">
+    `/activate-channel`, `/remove-channel`, `/reset`, `/generate`, `/dashboard`,
+    and `/ping`. Voice audio is a normal-reply sidecar, not a Slack command.
+  </Accordion>
+  <Accordion title="How does Twitch connection work?">
+    One OAuth flow authorizes the broadcaster first and a different, dedicated
+    bot account second. The second account's Twitch profile is what viewers see
+    in chat.
+  </Accordion>
+  <Accordion title="Which Twitch chat commands are available?">
+    `!reset`, `!generate`, `!poll`, `!announce`, `!clip`, `!shield`,
+    `!dashboard`, and `!ping`. Twitch does not allow third-party custom slash
+    commands.
+  </Accordion>
+  <Accordion title="Can Twitch upload generated media directly into chat?">
+    No. Generated images and audio are posted as public links. Twitch has no
+    general chat file or GIF upload endpoint; native emote text is supported.
+  </Accordion>
+  <Accordion title="What does a Verb email look like?">
+    The sender is `Persona Name <vanity@verba.ink>`. Generated images can be
+    inline and generated voice can be attached alongside the normal text reply.
+    The receiving inbox still controls the sender avatar it displays.
+  </Accordion>
+  <Accordion title="What limits Verb email?">
+    The owner has one account-wide UTC-day quota: Free `10`, Plus `50`, Pro
+    `100`, or Ultra `500`. Sending also requires per-Verb contact consent and a
+    configured Postmark transport.
   </Accordion>
 </AccordionGroup>
 
