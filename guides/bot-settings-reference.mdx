@@ -209,18 +209,17 @@ Conversation scope notes:
 ## Slack module settings
 
 - Slack is dedicated-only: one owner-created Slack app is assigned to one Verb.
-- Setup requires the app's `xoxb-` Bot User OAuth Token and Signing Secret.
-  Verba validates the bot identity, encrypts both values, and generates the
-  Events API, Interactivity, and Slash Command callback URLs.
-- Mentions and DMs work after installation. With autonomous mode enabled, the
-  Verb may also reply naturally in channels where its Slack app is present.
+- Setup requires the app's Client ID, Client Secret, and Signing Secret, then a
+  generated manifest and Slack OAuth authorization.
+- Mentions and DMs work after installation; autonomous replies are limited to
+  channels selected in **Active channels**.
 - Expression Controls cover emoji reactions, relevant GIF uploads, known
   workspace emojis, interactive Block Kit polls, thread routing, and scheduled
   messages.
-- Slash command toggles cover `/reset`, `/generate`, `/dashboard`, and `/ping`.
-- Content and workspace capability bundles depend on the scopes installed on
-  the owner's Slack app. After adding scopes, reinstall the app and reconnect
-  its current bot token.
+- Slash command toggles cover `/activate-channel`, `/remove-channel`, `/reset`,
+  `/generate`, `/dashboard`, and `/ping`.
+- Content and workspace capability bundles request additional Slack scopes when
+  enabled.
 - The old all-in-one selector command and a standalone Slack voice command are
   not installed.
 

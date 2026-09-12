@@ -86,7 +86,7 @@ Examples include:
 - 2FA backup codes
 - Connected-service access/refresh tokens
 - Bot/service tokens that must be reused later by the platform
-- Owner-provided Slack bot tokens and signing secrets
+- Owner-provided Slack client secrets and signing secrets
 - Twitch broadcaster and dedicated bot-account OAuth refresh tokens
 
 This means raw database access alone should not expose those values in their
@@ -96,10 +96,9 @@ original usable form.
 
 ### Slack
 
-Slack is dedicated-only. Each Verb owner creates and brands an app, then
-provides its Bot User OAuth Token and Signing Secret. Verba validates the token
-with Slack and encrypts both secrets. Never paste them into a chat or knowledge
-entry.
+Slack is dedicated-only. Each Verb owner creates an app and provides its Client
+ID, Client Secret, and Signing Secret. Verba encrypts those credentials and the
+OAuth bot token. Never paste them into a chat or knowledge entry.
 
 ### Twitch
 
