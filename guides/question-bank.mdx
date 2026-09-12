@@ -184,13 +184,14 @@ answers.
 
 <AccordionGroup>
   <Accordion title="What is the Slack dedicated-app flow?">
-    Create one Slack app for the Verb, paste its Client ID, Client Secret, and
-    Signing Secret into Verba, copy and apply the generated app manifest, then
-    authorize the app with Slack OAuth and choose active channels.
+    Create one Slack app for the Verb, set the app name and icon, add Verba's
+    recommended bot scopes, and install it to the workspace. Paste its Bot User
+    OAuth Token and Signing Secret into Verba, then copy Verba's callback URLs
+    into Event Subscriptions, Interactivity, and each slash command.
   </Accordion>
   <Accordion title="Which Slack commands are installed?">
-    `/activate-channel`, `/remove-channel`, `/reset`, `/generate`, `/dashboard`,
-    and `/ping`. Voice audio is a normal-reply sidecar, not a Slack command.
+    `/reset`, `/generate`, `/dashboard`, and `/ping`. Voice audio is a
+    normal-reply sidecar, not a Slack command.
   </Accordion>
   <Accordion title="How does Twitch connection work?">
     One OAuth flow authorizes the broadcaster first and a different, dedicated

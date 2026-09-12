@@ -19,8 +19,9 @@ Once connected, your Verb can:
 Slack uses one app per Verb. This means two Verbs in the same workspace can have
 different names, profile pictures, personalities, and permissions.
 
-You create the app in Slack, then connect it to Verba. Verba never asks for your
-Slack password or asks you to paste a bot token.
+You create the app in Slack, choose its name and profile picture, then connect
+its Bot User OAuth Token to Verba. Slack messages are sent by that bot user, so
+the workspace sees your app's identity instead of the shared Verba name and logo.
 
 ## Connect a Verb
 
@@ -30,26 +31,30 @@ Slack password or asks you to paste a bot token.
     **Create New App**, then choose **From scratch**. Select the workspace where
     you want to use this Verb.
   </Step>
-  <Step title="Copy the three values into Verba">
-    In Slack's **Basic Information** page, copy the **Client ID**, **Client
-    Secret**, and **Signing Secret** into the Verb's Slack page in Verba. Keep
-    the two secret values private.
+  <Step title="Choose the app identity">
+    Set the Slack app's display name, bot display name, and profile picture.
+    Slack controls this visible identity; Verba does not prepend the Verb's name
+    to normal replies.
   </Step>
-  <Step title="Copy the Verba setup into Slack">
-    In Verba, select **Copy configured Slack manifest**. In your Slack app,
-    open **App Manifest**, paste the setup, review it, and save it.
+  <Step title="Add permissions and install">
+    In **OAuth & Permissions**, add the bot scopes shown by Verba, then select
+    **Install to Workspace**. Copy the **Bot User OAuth Token** beginning with
+    `xoxb-`. Keep Slack token rotation disabled for this manual-token setup.
   </Step>
-  <Step title="Choose the app's appearance">
-    Set the Slack app's display name and upload the Verb's profile picture in
-    Slack. Slack does not accept the picture directly inside the copied setup.
+  <Step title="Connect securely in Verba">
+    Paste the Bot User OAuth Token and the app's **Signing Secret** from
+    **Basic Information**. Verba validates the token with Slack and encrypts
+    both values before storing them.
   </Step>
-  <Step title="Connect and authorize">
-    Return to Verba and select **Connect with Slack**. Approve the permissions
-    in Slack. The app will then appear as its own bot in the workspace.
+  <Step title="Configure callbacks">
+    Copy Verba's generated Event Subscriptions, Interactivity, and Slash Command
+    request URLs into the matching Slack app pages. Subscribe to the bot events
+    shown by Verba and use the same command URL for every listed slash command.
   </Step>
-  <Step title="Choose where it can speak freely">
-    Mentions and direct messages work after installation. Select the channels
-    where the Verb may answer without being mentioned.
+  <Step title="Invite the bot to channels">
+    Mentions and direct messages work after installation. Invite the bot to
+    every channel it should read. When autonomous mode is enabled, the Verb may
+    also join those channel conversations without being mentioned.
   </Step>
 </Steps>
 
@@ -57,14 +62,17 @@ Slack password or asks you to paste a bot token.
 
 - A direct message talks to the Verb directly.
 - Mentioning the Verb can trigger it in a channel it can access.
-- **Active channels** are the only channels where it may join in on its own.
+- When autonomous mode is enabled, it may join conversations in channels where
+  the Slack app is present and subscribed to message events.
 - **Thread Replies** keeps answers inside the thread where the conversation began.
 - Verba does not automatically join every channel in your workspace.
 
 ## Permissions
 
-Slack asks for additional permission only when you turn on a feature that needs
-it. The available groups are:
+Slack features work only when the app was installed with their corresponding
+bot scopes. If Verba reports missing scopes, add them in Slack, reinstall the
+app to the workspace, and reconnect the current bot token. The available groups
+are:
 
 | Permission group | What it allows |
 | --- | --- |
@@ -97,8 +105,6 @@ Each command has its own toggle in the Slack module:
 
 | Command | What it does |
 | --- | --- |
-| `/activate-channel` | Allows autonomous replies in the current channel |
-| `/remove-channel` | Stops autonomous replies in the current channel |
 | `/reset` | Clears recent conversation context without deleting long-term memories |
 | `/generate <prompt>` | Generates an image when Image Engine is enabled |
 | `/dashboard` | Shares the Verb dashboard link |
@@ -125,13 +131,16 @@ channel, and thread. Auto Memory can save useful details when you enable it.
 
 ## Important limitations
 
-- You must create and configure the Slack app yourself.
-- Adding a new permission group may ask you to approve Slack permissions again.
+- You must create, brand, configure, and install the Slack app yourself.
+- Token rotation must stay disabled; reconnect with a current `xoxb-` token if
+  Slack revokes or replaces it.
+- Adding scopes requires reinstalling the app and reconnecting its current bot token.
 - The Verb can only use channels and actions that Slack grants to its app.
 - Slack does not provide native voice calling for Verba.
 
-If setup fails, check that the three Slack values were copied correctly, the
-manifest was saved, and the app was installed in the intended workspace.
+If setup fails, check that the `xoxb-` Bot User OAuth Token and Signing Secret
+belong to the same installed app, the callback URLs were verified, and the app
+has been invited to the intended channel.
 
 <CardGroup cols={2}>
   <Card title="Image generation" icon="image" href="/guides/image-generation">
